@@ -1,0 +1,7 @@
+{
+  "name": "kabam-app",
+  "version": "0.0.1",
+  "dependencies": {
+    "kabam": "https://github.com/mykabam/kabam.git"
+  }
+}
