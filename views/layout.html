@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="CoreFrontend">
+<html lang="en" ng-app>
 <head>
     <meta charset="utf-8">
-    <title ng-bind="$state.current.name">Kabam</title>
+    <title>[[title]]</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="[[description]]"/>
     <meta name="keywords" content="[[keywords]]"/>
@@ -12,26 +12,39 @@
     [[^doIndex]]
     <meta name="robots" content="none">
     [[/doIndex]]
-    [[#css]]styles/main.css[[/css]]
+    <style>
+        body {
+            padding-top: 60px;
+            height: 100%;
+        }
+    </style>
+[[#css]]
+    <link type="text/css" href="[[url]]" rel="stylesheet" [[#media]]media="[[media]]"[[/media]]/>
+[[/css]]
+[[#javascripts]]
+    <script [[#async]]async="async"[[/async]] type="text/javascript" src="[[url]]"></script>
+[[/javascripts]]
     <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
-<div class="navbar navbar-static-top">
+<nav class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <a class="brand" href="#">Kabam</a>
-            <ul class="nav" ng-hide="authService.isAuthenticated()" ng-cloak>
-                <li><a ui-sref='login'>Log in</a></li>
-                <li><a ui-sref='signup'>Sign up</a></li>
-            </ul>
-            <ul class="nav pull-right" ng-show="authService.isAuthenticated()" ng-cloak>
-                <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
-                <li><a href="#" ng-click="authService.logOut()">Log out</a></li>
+            <ul class="nav">
+                <li class="active brand">[[title]]</li>
+                <li class="divider-vertical"></li>
+[[#myself]]
+                <li>
+                    <a href="/auth/myProfile">[[username]]</a>
+                </li>
+                <li>
+                    <a href="javascript:logoff()">LogOut</a>
+                </li>
+[[/myself]]
             </ul>
         </div>
     </div>
-</div>
-<div id="flash">
+</nav>
 [[#flash]]
 [[#error]]
 <div class="alert alert-error">
@@ -52,7 +65,6 @@
 </div>
 [[/info]]
 [[/flash]]
-</div>
 
 <div class="container">
     <div class="row-fluid">
@@ -61,35 +73,19 @@
         {{=[[ ]]=}}
     </div>
     <div class="span12">
-        <p>&copy; 2013 - <a href="https://github.com/mykabam">MyKabam</a></p>
+        <p>&copy; 2013 - <a href="#">Insert your name here</a></p>
     </div>
 </div>
-[[#js]]kabam/app.js[[/js]]
-<script type="text/javascript">
-    window.CONFIG = {
-        signUpURL: '/auth/signup',
-        loginURL: '/auth/login',
-        logoutURL: '/auth/logout'
-    };
-    window.USER = [[& user ]];
 
-if (typeof io !== 'undefined') {
-    var socket = io.connect();
-    socket.on('broadcast', function (data) {
-        $('#clock').html(data.time);
-    });
-    socket.on('notify', function (data) {
-        $('#flash').append('<div class="alert alert-info"><a class="close" data-dismiss="alert">×</a><strong>'+data.message+'</strong></div>');
-    });
-}
-function logoff() {
-    $.post('/auth/logout', {'_csrf': "[[csrf]]" }, function (data) {
-        window.location.href = '/';
-    });
-}
-setInterval(function () {
-    $('div.alert').hide('slow');
-}, 5000);
+<script type="text/javascript">
+    function logoff() {
+        $.post('/auth/logout', {'_csrf': "[[csrf]]" }, function (data) {
+            window.location.href = '/';
+        });
+    }
+    setTimeout(function () {
+        $('div.alert').hide('slow');
+    }, 2000);
 </script>
 </body>
 </html>

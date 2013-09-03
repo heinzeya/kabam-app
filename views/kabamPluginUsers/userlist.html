@@ -1,0 +1,50 @@
+<div class="span12" ng-controller='userList'>
+    <p>Search: <input ng-model="query"></p>
+    <table class="table table-striped table-bordered table-hover"  ng-controller='userList'>
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat='user in users  | filter:query | orderBy:"username"'>
+            <td>
+                <h4>{{ user.username }}</h4>
+                <p>{{ user.firstName +' '+ user.lastName }}</p>
+                <p>
+                    <a href="mailto:{{ user.email }}">{{ user.email }}</a> <span ng-show="user.emailVerified" class="label label-success"></span>
+                    Skype {{ user.skype }}
+                </p>
+            </td>
+            <td>
+                <div class="btn-group">
+                    <a class="btn btn-info" href="javascript:notify('{{ user._id }}')">Notify by flash</a>
+                    <a class="btn btn-info" href="javascript:notify('{{ user._id }}')">Notify by io</a>
+                    <a class="btn btn-info" href="javascript:notify('{{ user._id }}')">Notify by email</a>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-warning" href="javascript:setPassword('{{ user._id }}')">Set password</a>
+                </div>
+               <div class="btn-group">
+                    <a class="btn btn-danger" href="javascript:ban('{{ user._id }}')">Ban</a>
+                </div>
+                <div class="btn-group">
+                    <a class="btn btn-warning" href="javascript:setRoles('{{ user._id }}')">Role managent</a>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+    function userList($scope,$http){
+        $http.get('/api/rest/User')
+                .success(function(data) {
+                    $scope.users=data;
+                })
+                .error(function(err){
+                    console.log(err);
+                });
+    }
+</script>
