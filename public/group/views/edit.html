@@ -1,0 +1,18 @@
+<h2>Edit Group</h2>
+
+<div>id: {{group._id}}</div>
+
+<form name="groupForm" ng-submit="save()" class="form-horizontal">
+
+  <div class="control-group">
+    <label class="control-label" for="name">Name:</label>
+    <div class="controls">
+      <input ng-model="group.name" class="input-xlarge" id="name" focus>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="btn btn-primary">Save</button>
+    <button type="button" ng-click="remove()" ng-show="!recipe.id" class="btn">Delete</button>
+  </div>
+</form>

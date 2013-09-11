@@ -27,5 +27,7 @@
     "__httpMongo":"Boolean. Enable logging HTTP requests in mongo database",
     "errorMongo":true,
     "__errorMongo":"Boolean. Enable logging errors in mongo database"
-  }
+  },
+  "public": "./public",
+  "views": "./views"
 }
