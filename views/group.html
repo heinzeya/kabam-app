@@ -1,0 +1,15 @@
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+    <a class="navbar-brand" href="#">Kabam-App</a>
+  </div>
+
+  <ul class="nav navbar-nav" ng-hide="authService.isAuthenticated()" ng-cloak>
+    <li><a ui-sref='login'>Log in</a></li>
+    <li><a ui-sref='signup'>Sign up</a></li>
+  </ul>
+  <ul class="nav navbar-nav mavbar-right" ng-show="authService.isAuthenticated()" ng-cloak>
+    <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
+    <li><a href="#" ng-click="authService.logOut()">Log out</a></li>
+  </ul>
+</nav>
+<div id="flash">
