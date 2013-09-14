@@ -2,6 +2,10 @@
   "name": "kabam-app",
   "version": "0.0.1",
   "dependencies": {
-    "kabam": "https://github.com/mykabam/kabam.git"
+    "kabam": "https://github.com/mykabam/kabam.git",
+    "font-awesome": "~3.2.1",
+    "angular-ui-bootstrap": "~0.6.0",
+    "angular-ui-utils": "~0.0.4",
+    "ng-grid": "~2.0.7"
   }
 }

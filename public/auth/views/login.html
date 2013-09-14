@@ -1,0 +1,36 @@
+<div class="row text-center">
+  &nbsp;
+  <div class="alert alert-danger" ng-show="errors.form">
+    <a class="close" data-dismiss="alert">&times;</a>
+    <strong>{{ errors.form }}</strong>
+  </div>
+  <div class="alert alert-danger" ng-show="message">
+    {{ message }}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <h3>Login</h3>
+
+    <form class="form-inline" role="form">
+      <div class="form-group">
+        <label class="sr-only" for="username">Username</label>
+        <input type="text" ng-model="username" placeholder="Username" class="form-control" required/>
+      </div>
+      <div class="form-group">
+        <label class="sr-only" for="password">Password</label>
+        <input type="password" ng-model="password" placeholder="Password" class="form-control" required/>
+      </div>
+      <button class="btn btn-primary" ng-click="login()">Log in</button>
+      <div>
+        <br/>
+        <h4>or</h4>
+        <a href="/auth/google?redirect=/" class="btn btn-default"><span class="glyphicon icon-google-plus"></span> &nbsp; Login with Google</a>
+        <a href="/auth/google?redirect=/" class="btn btn-default disabled"><span class="glyphicon icon-github"></span> &nbsp; Login with Github</a>
+        <a href="/auth/google?redirect=/" class="btn btn-default disabled"><span class="glyphicon icon-linkedin"></span> &nbsp; Login with LinkedIn</a>
+      </div>
+    </form>
+  </div>
+</div>
+</div>

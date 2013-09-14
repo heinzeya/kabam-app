@@ -1,13 +1,21 @@
-<div ui-view></div>
-<div class="span12">
-[[#myself]]
-<h1>Hello, [[username]]!</h1>
-<p>See your <a href="/auth/myProfile">profile</a></p>
-<p>Request special personal <a href="/hello">greeting</a> from socket.io</p>
-[[/myself]]
-[[^myself]]
-<h1>Hello, Anonymous!</h1>
-[[/myself]]
-<p>You use browser of <b>[[userAgent]]</b></p>
-<p>You are from city of [[geoip.city]] from [[geoip.country]]</p>
+<div class="row">
+  <img src="/assets/styles/images/header.jpg" class="img-responsive monimus-img" alt="Monimus the Owl">
 </div>
+<div class="row">
+  &nbsp;
+</div>
+<div class="row">
+  <div class="col-md-2 col-md-offset-3 text-center">
+    <div class="progress"></div>
+    <a href="#/signup"><span class="badge">1</span> Create Account</a>
+  </div>
+  <div class="col-md-2 text-center">
+    <div class="progress"></div>
+    <a href="#"><span class="badge">2</span> Join Github</a>
+  </div>
+  <div class="col-md-2 text-center">
+    <div class="progress"></div>
+    <a href="#"><span class="badge">3</span> Join LinkedIn</a>
+  </div>
+</div>
+<div ui-view></div>
