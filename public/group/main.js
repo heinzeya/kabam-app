@@ -27,7 +27,20 @@ groupModule.config([
           return GroupLoader;
         }
       }
-      })
+    })
+    .state('groupNew', {
+      url: '/group/new',
+      templateUrl: '/assets/group/views/edit.html',
+      controller: 'GroupNewCtrl',
+      resolve: {
+        group: function () {
+          return {
+            _id: null,
+            name: 'Ali'
+          };
+        }
+      }
+    })
     .state('groupEdit', {
       url: '/group/edit/:id',
       templateUrl: '/assets/group/views/edit.html',
