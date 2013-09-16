@@ -2,7 +2,7 @@
   "__comment": "Values prepended by __ are comments to actual values, without __ on the beginning",
   "__service.json": "This config file contains sensitive information, that can be overriden by enviroment values - https://github.com/mykabam/kabam#enviroment.",
 
-  "hostUrl": false,
+  "hostUrl": "http://target.monimus.com:4000/",
   "__hostUrl": "The canonical url of this host - for example, http://mykabam.herokuapp.com, if set to false, it is quessed from http://'+os.hostname()+'/ ",
 
   "secret": false,
