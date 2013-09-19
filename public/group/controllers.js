@@ -19,6 +19,10 @@ groupModule.controller(
         columnDefs: [
           { field: '_id', displayName: 'ID' },
           { field: 'name' },
+          { field: 'uri' },
+          { field: 'tier' },
+          { field: 'schoolId' },
+          { field: 'courseId' },
           { field: 'action',
             enableEditCell: false,
             cellTemplate: linkCellTemplate }
