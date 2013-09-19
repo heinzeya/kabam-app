@@ -34,5 +34,3 @@ if(main.config.startCluster){
 } else {
   main.start();//to start single process
 }
-
-
