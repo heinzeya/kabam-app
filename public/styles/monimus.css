@@ -58,3 +58,11 @@
 .navbar-default .navbar-form {
   border-color: #bc3d11;
 }
+
+.nav, .pagination, .carousel a {
+  cursor: pointer;
+}
+
+.grid-style {
+  height: 200px;
+}

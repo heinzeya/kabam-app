@@ -31,11 +31,6 @@ groupModule.controller(
       $scope.add = function() {
         $location.path('/group/new');
       };
-
-      $scope.$on('ngGridEventData', function (event, data) {
-        console.log($scope.groupList);
-        //$scope.groupList.selectRow(0, true);
-      });
     }
   ]
 );
@@ -46,10 +41,8 @@ groupModule.controller(
     '$scope', '$location', 'group',
     function($scope, $location, group) {
       $scope.group = group;
-
-      console.log('group.id', group._id);
       $scope.edit = function() {
-        $location.path('/group/edit/' + group._id);
+        $location.path('/group/edit/' + $scope.group._id);
       };
     }
   ]

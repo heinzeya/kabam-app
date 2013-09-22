@@ -5,14 +5,79 @@
 <form name="groupForm" ng-submit="save()" class="form-horizontal">
 
   <div class="control-group">
-    <label class="control-label" for="name">Name:</label>
+    <label class="control-label" for="name">Name</label>
     <div class="controls">
       <input ng-model="group.name" class="input-xlarge" id="name" focus>
     </div>
   </div>
 
+  <div class="control-group">
+    <label class="control-label" for="uri">URI</label>
+    <div class="controls">
+      <input ng-model="group.uri" class="input-xlarge" id="uri">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="tier">Tier</label>
+    <div class="controls">
+      <input ng-model="group.tier" class="input-xlarge" id="tier">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="schoolId">School</label>
+    <div class="controls">
+      <input ng-model="group.schoolId" class="input-xlarge" id="schoolId">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="courseId">Course</label>
+    <div class="controls">
+      <input ng-model="group.courseId" class="input-xlarge" id="courseId">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="descriptionForPublic">Public Description</label>
+    <div class="controls">
+      <input ng-model="group.descriptionForPublic" class="input-xlarge" id="descriptionForPublic">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="descriptionForMembers">Member Description</label>
+    <div class="controls">
+      <input ng-model="group.descriptionForMembers" class="input-xlarge" id="descriptionForMembers">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="isHidden">Hidden</label>
+    <div class="controls">
+      <input ng-model="group.isHidden" class="input-xlarge" id="isHidden">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="isOpenForParent">OpenForParent</label>
+    <div class="controls">
+      <input ng-model="group.isOpenForParent" class="input-xlarge" id="isOpenForParent">
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="isOpenForAll">OpenForAll</label>
+    <div class="controls">
+      <input ng-model="group.isOpenForAll" class="input-xlarge" id="isOpenForAll">
+    </div>
+  </div>
+
+  <br>
+
   <div class="form-actions">
     <button class="btn btn-primary">Save</button>
-    <button type="button" ng-click="remove()" ng-show="!recipe.id" class="btn">Delete</button>
+    <button type="button" ng-click="remove()" ng-show="!group.id" class="btn">Delete</button>
   </div>
 </form>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="CoreFrontend">
+<html lang="en" ng-app="kabam">
 <head>
   <meta charset="utf-8">
   <title ng-bind="$state.current.name">Kabam</title>
@@ -95,27 +95,9 @@
      loginURL: '/auth/login',
      logoutURL: '/auth/logout'
     };
-    window.USER = [[& user ]];
+    window.USER = [[#user]][[& user ]][[/user]][[^user]]{}[[/user]];
   </script>
+
   [[#js]]loader.js[[/js]]
-  <script type="text/javascript">
-   if (typeof io !== 'undefined') {
-     var socket = io.connect();
-     socket.on('broadcast', function (data) {
-       $('#clock').html(data.time);
-     });
-     socket.on('notify', function (data) {
-       $('#flash').append('<div class="alert alert-info"><a class="close" data-dismiss="alert">&times;</a><strong>'+data.message+'</strong></div>');
-     });
-   }
-   function logoff() {
-     $.post('/auth/logout', {'_csrf': "[[csrf]]" }, function (data) {
-       window.location.href = '/';
-     });
-   }
-   setInterval(function () {
-     $('div.alert').hide('slow');
-   }, 5000);
-  </script>
 </body>
 </html>

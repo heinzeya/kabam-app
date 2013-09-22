@@ -1,4 +1,4 @@
-var groupServices = angular.module('Group.services', ['ngResource', 'ngGrid']);
+var groupServices = angular.module('Group.services', ['ngResource', 'ngGrid', 'ui.router']);
 
 groupServices.factory('Group', [
   '$resource',
@@ -9,15 +9,18 @@ groupServices.factory('Group', [
 
 groupServices.factory('GroupLoader', [
   'Group', '$stateParams', '$q',
-  function(Group, $stateParams, $q) {
-    console.log($stateParams);
-    var delay = $q.defer();
-    Group.get({id: $stateParams.id}, function(group) {
-      delay.resolve(group);
-    }, function() {
-      delay.reject('Unable to fetch group ' + $stateParams.id);
-    });
-    return delay.promise;
+  function(Group, $q) {
+    var get = function(id) {
+      console.log('here');
+      var delay = $q.defer();
+      Group.get({id: id}, function(group) {
+        delay.resolve(group);
+      }, function() {
+        delay.reject('Unable to fetch group ' + id);
+      });
+      return delay.promise;
+    };
+    return { get: get };
   }
 ]);
 

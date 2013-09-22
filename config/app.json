@@ -29,5 +29,7 @@
     "__errorMongo":"Boolean. Enable logging errors in mongo database"
   },
   "public": "./public",
-  "views": "./views"
+  "views": "./views",
+  "disableCsrf": true,
+  "toobusy": { "maxLag": 180 }
 }
