@@ -51,11 +51,12 @@ groupModule.controller(
 groupModule.controller(
   'GroupEditCtrl',
   [
-    '$scope', '$location', 'group',
+    '$scope', '$location', 'group', 'Group',
     function($scope, $location, group) {
       $scope.group = group;
 
       console.log('group.id', group._id);
+
       $scope.save = function() {
         $scope.group.$save(function(group) {
           $location.path('/group/edit/' + group._id);

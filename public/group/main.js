@@ -51,12 +51,11 @@ groupModule.config([
           templateUrl: '/assets/group/views/edit.html',
           controller: 'GroupEditCtrl',
           resolve: {
-            'group': function() {
-              return {
-                '_id': 0,
+            'group': function(Group) {
+              return new Group({
                 'name': '',
                 'tier': 0
-              };
+              });
             }
           }
         },
