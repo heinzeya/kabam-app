@@ -36,6 +36,8 @@ groupModule.controller(
         var idx = _.findIndex($scope.groups, { _id: updatedGroup._id });
         if (idx >= 0) {
           $scope.groups[idx] = updatedGroup;
+        } else {
+          $scope.groups.push(updatedGroup);
         }
         // console.log('event groupUpdate captured', $scope.groups, updatedGroup);
         // $scope.groups.push({_id:'123', 'name': 'test', 'uri': 'bbb'});
