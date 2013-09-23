@@ -32,14 +32,20 @@ groupModule.controller(
         $state.go('groupNew');
       };
 
-      $rootScope.$on('groupDataChange', function(group) {
-        console.log('event groupUpdate captured');
-        Group.query(function(groups) {
-          $scope.groups = groups;
-          if (!$scope.$$phase) {
-            $scope.$apply();
-          }
-        });
+      $rootScope.$on('groupDataChange', function(event, updatedGroup) {
+        var idx = _.findIndex($scope.groups, { _id: updatedGroup._id });
+        if (idx >= 0) {
+          $scope.groups[idx] = updatedGroup;
+        }
+        // console.log('event groupUpdate captured', $scope.groups, updatedGroup);
+        // $scope.groups.push({_id:'123', 'name': 'test', 'uri': 'bbb'});
+        // Group.query(function(groups) {
+        //   $scope.groups = groups;
+        //   if (!$scope.$$phase) {
+        //     $scope.$apply();
+        //     console.log('apply');
+        //   }
+        // });
       });
     }
   ]

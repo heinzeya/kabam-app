@@ -28,50 +28,45 @@
   <div class="control-group">
     <label class="control-label" for="schoolId">School</label>
     <div class="controls">
-      <input ng-model="group.schoolId" class="input-xlarge" id="schoolId">
+      <input ng-model="group.schoolId" class="input-xlarge" id="schoolId" disabled>
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="courseId">Course</label>
     <div class="controls">
-      <input ng-model="group.courseId" class="input-xlarge" id="courseId">
+      <input ng-model="group.courseId" class="input-xlarge" id="courseId" disabled>
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="descriptionPublic">Public Description</label>
     <div class="controls">
-      <input ng-model="group.descriptionPublic" class="input-xlarge" id="descriptionPublic">
+      <textarea ng-model="group.descriptionPublic" class="form-control" id="descriptionPublic" rows="4"></textarea>
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="descriptionForMembers">Member Description</label>
     <div class="controls">
-      <input ng-model="group.descriptionForMembers" class="input-xlarge" id="descriptionForMembers">
+      <textarea ng-model="group.descriptionForMembers" class="form-control" id="descriptionForMembers" rows="4"></textarea>
     </div>
   </div>
 
-  <div class="control-group">
-    <label class="control-label" for="isHidden">Hidden</label>
-    <div class="controls">
-      <input ng-model="group.isHidden" class="input-xlarge" id="isHidden">
-    </div>
+  <div class="control-group checkbox">
+    <label class="control-label" for="isHidden"><input type="checkbox" ng-model="group.isHidden" id="isHidden"> Hidden</label>
   </div>
 
-  <div class="control-group">
-    <label class="control-label" for="isOpenForParent">OpenForParent</label>
-    <div class="controls">
-      <input ng-model="group.isOpenForParent" class="input-xlarge" id="isOpenForParent">
-    </div>
+  <div class="control-group checkbox">
+    <label class="control-label" for="isOpenToParent">
+      <input type="checkbox" ng-model="group.isOpenToParent" id="isOpen To Parent"> Open To Parent
+    </label>
   </div>
 
-  <div class="control-group">
-    <label class="control-label" for="isOpenForAll">OpenForAll</label>
-    <div class="controls">
-      <input ng-model="group.isOpenForAll" class="input-xlarge" id="isOpenForAll">
-    </div>
+  <div class="control-group checkbox">
+    <label class="control-label" for="isOpenToAll">
+      <input type="checkbox" ng-model="group.isOpenToAll" id="isOpenToAll"> Open to All
+    </label>
   </div>
 
   <br>

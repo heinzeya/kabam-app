@@ -1,4 +1,5 @@
 //= require jquery/jquery.js
+//= require lodash/dist/lodash.js
 //= require angular/angular.js
 //= require angular-resource/angular-resource.js
 //= require angular-cookies/angular-cookies.js

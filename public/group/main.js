@@ -57,8 +57,8 @@ groupModule.config([
                 'schoolId': null,
                 'courseId': null,
                 'isHidden': false,
-                'isOpenForParent': true,
-                'isOpenForAll': true
+                'isOpenToParent': true,
+                'isOpenToAll': true
               });
             }
           }

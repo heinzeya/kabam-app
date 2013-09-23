@@ -6,7 +6,8 @@
     "font-awesome": "*",
     "angular-ui-bootstrap": "*",
     "angular-ui-utils": "*",
-    "ng-grid": "*"
+    "ng-grid": "*",
+    "lodash": "*"
   },
   "devDependencies": {
     "angular-mocks": "*",
