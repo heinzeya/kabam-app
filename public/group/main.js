@@ -53,8 +53,12 @@ groupModule.config([
           resolve: {
             'group': function(Group) {
               return new Group({
-                'name': '',
-                'tier': 0
+                'tier': 0,
+                'schoolId': null,
+                'courseId': null,
+                'isHidden': false,
+                'isOpenForParent': true,
+                'isOpenForAll': true
               });
             }
           }

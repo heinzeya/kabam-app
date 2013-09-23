@@ -30,6 +30,5 @@
   },
   "public": "./public",
   "views": "./views",
-  "disableCsrf": true,
   "toobusy": { "maxLag": 180 }
 }

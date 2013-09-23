@@ -1,8 +1,8 @@
 groupModule.controller(
   'GroupListCtrl',
   [
-    '$scope', '$location', 'groups',
-    function($scope, $location, groups) {
+    '$rootScope', '$scope', '$state', '$q', 'groups', 'Group',
+    function($rootScope, $scope, $state, $q, groups, Group) {
       $scope.groups = groups;
       $scope.groupRows = groups.map(function(group) {
         group['action'] = group._id;
@@ -17,7 +17,6 @@ groupModule.controller(
         enableRowSelection: true,
         selectedItems: $scope.selectedItems,
         columnDefs: [
-          { field: '_id', displayName: 'ID' },
           { field: 'name' },
           { field: 'uri' },
           { field: 'tier' },
@@ -28,9 +27,20 @@ groupModule.controller(
             cellTemplate: linkCellTemplate }
         ]
       };
+
       $scope.add = function() {
-        $location.path('/group/new');
+        $state.go('groupNew');
       };
+
+      $rootScope.$on('groupDataChange', function(group) {
+        console.log('event groupUpdate captured');
+        Group.query(function(groups) {
+          $scope.groups = groups;
+          if (!$scope.$$phase) {
+            $scope.$apply();
+          }
+        });
+      });
     }
   ]
 );
@@ -38,11 +48,11 @@ groupModule.controller(
 groupModule.controller(
   'GroupViewCtrl',
   [
-    '$scope', '$location', 'group',
-    function($scope, $location, group) {
+    '$scope', '$state', 'group',
+    function($scope, $state, group) {
       $scope.group = group;
       $scope.edit = function() {
-        $location.path('/group/edit/' + $scope.group._id);
+        $state.go('groupEdit', { id: $scope.group._id });
       };
     }
   ]
@@ -51,16 +61,23 @@ groupModule.controller(
 groupModule.controller(
   'GroupEditCtrl',
   [
-    '$scope', '$location', 'group', 'Group',
-    function($scope, $location, group) {
+    '$rootScope', '$scope', '$state', 'group',
+    function($rootScope, $scope, $state, group) {
+
       $scope.group = group;
 
-      console.log('group.id', group._id);
-
       $scope.save = function() {
+        if ($scope.group.schoolId === '') {
+          $scope.group.schoolId = null;
+        }
+        if ($scope.group.courseId === '') {
+          $scope.group.courseId = null;
+        }
         $scope.group.$save(function(group) {
-          $location.path('/group/edit/' + group._id);
+          $state.go('groupList');
+          $rootScope.$broadcast('groupDataChange', $scope.group);
         });
       };
+
   }]
 );
