@@ -2,7 +2,13 @@
 //=require_self
 //=require ./controllers.js
 
-var groupModule = angular.module('KabamGroup', ['Group.services', 'ui.router', 'kabam.states']);
+var groupModule = angular.module('KabamGroup',
+                                 ['Group.services',
+                                  'ui.router',
+                                  'ui.bootstrap',
+                                  'ui.select2',
+                                  'kabam.states'
+                                 ]);
 
 groupModule.config([
   'kabamStatesProvider',
@@ -10,16 +16,14 @@ groupModule.config([
     kabamStatesProvider
       .push([
         {
-          name: 'groupTest',
-          url: '/group/test',
-          template: '<h3>hello</h3>',
-          controller: function() {
-            console.log('test ctrl');
-          }
+          name: 'group',
+          url: '/group',
+          templateUrl: '/assets/group/views/index.html',
+          controller: 'GroupMainCtrl'
         },
         {
-          name: 'groupList',
-          url: '/group/list',
+          name: 'group.list',
+          url: '/list',
           templateUrl: '/assets/group/views/list.html',
           controller: 'GroupListCtrl',
           resolve: {
@@ -29,8 +33,8 @@ groupModule.config([
           }
         },
         {
-          name: 'groupView',
-          url: '/group/view/:id',
+          name: 'group.view',
+          url: '/view/:id',
           templateUrl: '/assets/group/views/view.html',
           controller: 'GroupViewCtrl',
           resolve: {
@@ -46,8 +50,8 @@ groupModule.config([
           }
         },
         {
-          name: 'groupNew',
-          url: '/group/new',
+          name: 'group.new',
+          url: '/new',
           templateUrl: '/assets/group/views/edit.html',
           controller: 'GroupEditCtrl',
           resolve: {
@@ -64,8 +68,8 @@ groupModule.config([
           }
         },
         {
-          name: 'groupEdit',
-          url: '/group/edit/:id',
+          name: 'group.edit',
+          url: '/edit/:id',
           templateUrl: '/assets/group/views/edit.html',
           controller: 'GroupEditCtrl',
           resolve: {

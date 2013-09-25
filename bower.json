@@ -4,10 +4,10 @@
   "dependencies": {
     "kabam": "https://github.com/mykabam/kabam.git",
     "font-awesome": "*",
-    "angular-ui-bootstrap": "*",
     "angular-ui-utils": "*",
     "ng-grid": "*",
-    "lodash": "*"
+    "lodash": "*",
+    "angular-ui-select2": "~0.0.2"
   },
   "devDependencies": {
     "angular-mocks": "*",

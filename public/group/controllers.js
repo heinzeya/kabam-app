@@ -1,4 +1,12 @@
 groupModule.controller(
+  'GroupMainCtrl',
+  [
+    '$rootScope', '$scope', '$state',
+    function($rootScope, $scope, $state) {
+      $state.transitionTo('group.list');
+}]);
+
+groupModule.controller(
   'GroupListCtrl',
   [
     '$rootScope', '$scope', '$state', '$q', 'groups', 'Group',
@@ -29,7 +37,7 @@ groupModule.controller(
       };
 
       $scope.add = function() {
-        $state.go('groupNew');
+        $state.go('group.new');
       };
 
       $rootScope.$on('groupDataChange', function(event, updatedGroup) {
@@ -60,7 +68,7 @@ groupModule.controller(
     function($scope, $state, group) {
       $scope.group = group;
       $scope.edit = function() {
-        $state.go('groupEdit', { id: $scope.group._id });
+        $state.go('group.edit', { id: $scope.group._id });
       };
     }
   ]
@@ -82,9 +90,22 @@ groupModule.controller(
           $scope.group.courseId = null;
         }
         $scope.group.$save(function(group) {
-          $state.go('groupList');
+          $state.go('group.list');
           $rootScope.$broadcast('groupDataChange', $scope.group);
         });
+      };
+
+      $scope.tierOptions = {
+        width: 'element',
+        'minimumResultsForSearch': -1
+      };
+
+      $scope.schoolOptions = {
+        width: 'element'
+      };
+
+      $scope.courseOptions = {
+        width: 'element'
       };
 
   }]

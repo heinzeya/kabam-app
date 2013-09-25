@@ -21,7 +21,12 @@
   <div class="control-group">
     <label class="control-label" for="tier">Tier</label>
     <div class="controls">
-      <input ng-model="group.tier" class="input-xlarge" id="tier">
+      <select ui-select2="tierOptions" ng-model="group.tier" data-placeholder="Choose groups tier" id="tier">
+        <option value="0">0 - World</option>
+        <option value="1">1 - School / Organization</option>
+        <option value="2">2 - Course</option>
+        <option value="3">3 - Group</option>
+      </select>
     </div>
   </div>
 
@@ -29,6 +34,10 @@
     <label class="control-label" for="schoolId">School</label>
     <div class="controls">
       <input ng-model="group.schoolId" class="input-xlarge" id="schoolId" disabled>
+      <select ui-select2 ng-model="group.schoolId" data-placeholder="Pick a school">
+        <option value=""></option>
+        <option ng-repeat="school in schools" value="{{school._id}}">{{school.name}}</option>
+      </select>
     </div>
   </div>
 
