@@ -1,76 +1,55 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="kabam">
-<head>
-  <meta charset="utf-8">
-  <title ng-bind="$state.current.name">Kabam</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="[[description]]"/>
-  <meta name="keywords" content="[[keywords]]"/>
-  [[#doIndex]]
-  <meta name="robots" content="all"/>
-  [[/doIndex]]
-  [[^doIndex]]
-  <meta name="robots" content="none">
-  [[/doIndex]]
-  [[#css]]styles/bootstrap.united.css[[/css]]
-  [[#css]]font-awesome/css/font-awesome.css[[/css]]
-  [[#css]]select2/select2.css[[/css]]
-  [[#css]]ng-grid/ng-grid.css[[/css]]
-  [[#css]]styles/monimus.css[[/css]]
-  <link rel="shortcut icon" href="/favicon.ico">
-</head>
-<body>
-  <div class="container">
+  <head>
+    <meta charset="utf-8">
+    <title ng-bind="$state.current.name">Kabam</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="[[description]]"/>
+    <meta name="keywords" content="[[keywords]]"/>
+    [[#doIndex]]
+    <meta name="robots" content="all"/>
+    [[/doIndex]]
+    [[^doIndex]]
+    <meta name="robots" content="none">
+    [[/doIndex]]
+    [[#css]]styles/bootstrap.united.css[[/css]]
+    [[#css]]font-awesome/css/font-awesome.css[[/css]]
+    [[#css]]select2/select2.css[[/css]]
+    [[#css]]ng-grid/ng-grid.css[[/css]]
+    [[#css]]styles/monimus.css[[/css]]
+    <link rel="shortcut icon" href="/favicon.ico">
+  </head>
+  <body>
+    <div class="container">
 
-    <nav class="navbar navbar-default col-md-12" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Monimus</a>
-      </div>
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav navbar-left" ng-show="authService.isAuthenticated()" ng-cloak>
-          <li><a ui-sref="group.list">Group</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right" ng-hide="authService.isAuthenticated()" ng-cloak>
-          <li><a ui-sref="login">Log in</a></li>
-          <li><a ui-sref="signup">Sign up</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right" ng-show="authService.isAuthenticated()" ng-cloak>
-          <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
-          <li><a href="#" ng-click="authService.logOut()">Log out</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div id="flash">
-      [[#flash]]
-      [[#error]]
-      <div class="alert alert-error">
-        <a class="close" data-dismiss="alert">×</a>
-        <strong>[[error]]</strong>
-      </div>
-      [[/error]]
-      [[#success]]
-      <div class="alert alert-success">
-        <a class="close" data-dismiss="alert">×</a>
-        <strong>[[success]]</strong>
-      </div>
-      [[/success]]
-      [[#info]]
-      <div class="alert alert-info">
-        <a class="close" data-dismiss="alert">×</a>
-        <strong>[[info]]</strong>
-      </div>
-      [[/info]]
-      [[/flash]]
+      <nav class="navbar navbar-default col-md-12" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Monimus</a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav navbar-left" ng-show="authService.isAuthenticated()" ng-cloak>
+            <li><a ui-sref="group.list">Group</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right" ng-hide="authService.isAuthenticated()" ng-cloak>
+            <li><a ui-sref="login">Log in</a></li>
+            <li><a ui-sref="signup">Sign up</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right" ng-show="authService.isAuthenticated()" ng-cloak>
+            <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
+            <li><a href="#" ng-click="authService.logOut()">Log out</a></li>
+          </ul>
+        </div>
+      </nav>
+
     </div>
-    <div class="row">
-      [[& yield]]
-    </div>
+
+    <div ui-view></div>
 
     <br>
     <br>
@@ -88,17 +67,36 @@
       </span>
     </footer>
 
-  </div>
+    <noscript>
+      <h1>Error!</h1>
+      <p>Enable javascript execution for this site!</p>
+    </noscript>
 
-  <script type="text/javascript">
-   window.CONFIG = {
-     signUpURL: '/auth/signup',
-     loginURL: '/auth/login',
-     logoutURL: '/auth/logout'
-    };
-    window.USER = [[#user]][[& user ]][[/user]][[^user]]{}[[/user]];
-  </script>
+    <script type="text/javascript">
+     window.CONFIG = {
+       signUpURL: '/auth/signup',
+       loginURL: '/auth/login',
+       logoutURL: '/auth/logout',
+       recoveryURL: '/auth/restoreAccount',
+       profileEditURL: '/auth/myProfile'
+     };
+     window.USER = [[#user]][[& user ]][[/user]][[^user]]{}[[/user]];
 
-  [[#js]]loader.js[[/js]]
-</body>
+     [[#flash]]
+     window.FLASH = {};
+     [[#error]]
+     window.FLASH.ERROR = "[[error]]";
+     [[/error]]
+     [[#success]]
+     window.FLASH.SUCCESS = "[[success]]";
+     [[/success]]
+     [[#info]]
+     window.FLASH.INFO = "[[info]]";
+     [[/info]]
+     [[/flash]]
+
+    </script>
+
+    [[#js]]loader.js[[/js]]
+  </body>
 </html>

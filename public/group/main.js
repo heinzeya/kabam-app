@@ -83,7 +83,42 @@ groupModule.config([
               return delay.promise;
             }
           }
+        },
+        {
+          name: 'group.admin',
+          url: '/:id/admin',
+          templateUrl: '/assets/group/views/admin.html',
+          controller: 'GroupAdminCtrl',
+          resolve: {
+            group: function(Group, $stateParams, $q) {
+              var delay = $q.defer();
+              Group.get({id: $stateParams.id}, function(group) {
+                delay.resolve(group);
+              }, function() {
+                delay.reject('Unable to fetch group ' + $stateParams.id);
+              });
+              return delay.promise;
+            }
+          }
+        },
+        {
+          name: 'group.member',
+          url: '/:id/member',
+          templateUrl: '/assets/group/views/member.html',
+          controller: 'GroupMemberCtrl',
+          resolve: {
+            group: function(Group, $stateParams, $q) {
+              var delay = $q.defer();
+              Group.get({id: $stateParams.id}, function(group) {
+                delay.resolve(group);
+              }, function() {
+                delay.reject('Unable to fetch group ' + $stateParams.id);
+              });
+              return delay.promise;
+            }
+          }
         }
+
       ]);
   }
 ]);

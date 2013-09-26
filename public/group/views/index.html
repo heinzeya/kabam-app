@@ -1,45 +1,98 @@
 <div class="row">
   <div class="col-md-3">
-    <h3>Group</h3>
-    <ul>
-      <li>Site</li>
-      <ul>
-        <li>School 1
-          <ul>
-            <li>Course 1.1
-              <ul>
-                <li>Group 1.1.1</li>
-                <li>Group 1.1.2</li>
-              </ul>
-            </li>
-            <li>Course 1.2
-              <ul>
-                <li>Group 1.2.1</li>
-                <li>Group 1.2.2</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-      <ul>
-        <li>School 2
-          <ul>
-            <li>Course 2.1
-              <ul>
-                <li>Group 2.1.1</li>
-                <li>Group 2.1.2</li>
-              </ul>
-            </li>
-            <li>Course 2.2
-              <ul>
-                <li>Group 2.2.1</li>
-                <li>Group 2.2.2</li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </ul>
+    <div class="panel-group" id="group-accordion">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#group-accordion" href="#collapseOne">
+              Site
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in">
+          <div class="panel-body">
+            <ul>
+              <li><a ui-sref="group.list">Main Organization List</a></li>
+              <li><a href="#">Main Profile</a></li>
+              <li><a href="#">Admins</a></li>
+              <li><a href="#">Members</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#group-accordion" href="#collapseSchool1">
+              School 1
+            </a>
+          </h4>
+        </div>
+        <div id="collapseSchool1" class="panel-collapse collapse">
+          <div class="panel-body">
+            <ul>
+              <li><a href="#">Profile</a>
+              <li><a href="#">Admins</a>
+              <li><a href="#">Members</a>
+              <li>Courses
+                <ul>
+                  <li>Course 1.1
+                    <ul>
+                      <li>Group 1.1.1</li>
+                      <li>Group 1.1.2</li>
+                    </ul>
+                  </li>
+                  <li>Course 1.2
+                    <ul>
+                      <li>Group 1.2.1</li>
+                      <li>Group 1.2.2</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#group-accordion" href="#collapseSchool2">
+              School 2
+            </a>
+          </h4>
+        </div>
+        <div id="collapseSchool2" class="panel-collapse collapse">
+          <div class="panel-body">
+            <ul>
+              <li><a href="#">Profile</a>
+              <li><a href="#">Admins</a>
+              <li><a href="#">Members</a>
+              <li>Courses
+                <ul>
+                  <li>Course 2.1
+                    <ul>
+                      <li>Group 2.1.1</li>
+                      <li>Group 2.1.2</li>
+                    </ul>
+                  </li>
+                  <li>Course 2.2
+                    <ul>
+                      <li>Group 2.2.1</li>
+                      <li>Group 2.2.2</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
   <div class="col-md-9">
     <div ui-view></div>

@@ -12,13 +12,19 @@
   <tr><th>Hidden</th><td>{{group.isHidden}}</td></tr>
   <tr><th>Open to Parent</th><td>{{group.isOpenToParent}}</td></tr>
   <tr><th>Open to All</th><td>{{group.isOpenToAll}}</td></tr>
-  <tr><th>Members</th><td>{{group.members}}</td></tr>
+  <tr><th>Admins</th><td>[list of admins]</td></tr>
+  <tr><th>Number of Members</th><td>[10]</td></tr>
+  <tr><th>Sub Groups</th><td>[list of subgroups]</td></tr>
 </table>
 
 <br>
 
-<form ng-submit="edit()" class="form-horizontal">
-  <div class="form-actions">
-    <button class="btn btn-primary">Edit</button>
-  </div>
-</form>
+<div class="row">
+  <button class="btn btn-primary" ng-click="edit()">Edit</button>
+
+  <button class="btn btn-primary" ng-click="addSubGroup()">Add Sub Group</button>
+
+  <button class="btn btn-primary" ng-click="admin()">Manage Admins</button>
+
+  <button class="btn btn-primary" ng-click="member()">Manage Members</button>
+</div>

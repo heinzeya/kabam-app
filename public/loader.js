@@ -1,5 +1,6 @@
 //= require jquery/jquery.js
 //= require lodash/dist/lodash.js
+//= require bootstrap/dist/js/bootstrap.js
 //= require select2/select2.js
 //= require angular/angular.js
 //= require angular-resource/angular-resource.js

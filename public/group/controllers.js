@@ -67,9 +67,22 @@ groupModule.controller(
     '$scope', '$state', 'group',
     function($scope, $state, group) {
       $scope.group = group;
+
       $scope.edit = function() {
         $state.go('group.edit', { id: $scope.group._id });
       };
+
+      $scope.addSubGroup = function() {
+      };
+
+      $scope.admin = function() {
+        $state.go('group.admin', { id: $scope.group._id });
+      };
+
+      $scope.member = function() {
+        $state.go('group.member', { id: $scope.group._id });
+      };
+
     }
   ]
 );
@@ -108,5 +121,76 @@ groupModule.controller(
         width: 'element'
       };
 
-  }]
+    }
+  ]
+);
+
+groupModule.controller(
+  'GroupAdminCtrl',
+  [
+    '$rootScope', '$scope', '$state', 'group',
+    function($rootScope, $scope, $state, group) {
+
+      $scope.group = group;
+
+      $scope.admins = [
+        { name: 'AAA', action: '0' },
+        { name: 'BBB', action: '1' },
+        { name: 'CCC', action: '2' }
+      ];
+
+      var linkCellTemplate = '<div class="ngCellText" ng-class="col.colIndex()">' +
+            '<a href="#/group/admin/view/{{row.getProperty(col.field)}}">View</a> | ' +
+            '<a href="#/group/admin/remove/{{row.getProperty(col.field)}}">Remove</a>' +
+            '</div>';
+
+      $scope.gridOptions = {
+        data: 'admins',
+        enableRowSelection: true,
+        selectedItems: $scope.selectedItems,
+        columnDefs: [
+          { field: 'name' },
+          { field: 'action',
+            enableEditCell: false,
+            cellTemplate: linkCellTemplate }
+        ]
+      };
+
+    }
+  ]
+);
+
+groupModule.controller(
+  'GroupMemberCtrl',
+  [
+    '$rootScope', '$scope', '$state', 'group',
+    function($rootScope, $scope, $state, group) {
+
+      $scope.group = group;
+
+      $scope.members = [
+        { name: 'AAA', action: '0' },
+        { name: 'BBB', action: '1' },
+        { name: 'CCC', action: '2' }
+      ];
+
+      var linkCellTemplate = '<div class="ngCellText" ng-class="col.colIndex()">' +
+            '<a href="#/group/member/view/{{row.getProperty(col.field)}}">View</a> | ' +
+            '<a href="#/group/member/remove/{{row.getProperty(col.field)}}">Remove</a>' +
+            '</div>';
+
+      $scope.gridOptions = {
+        data: 'members',
+        enableRowSelection: true,
+        selectedItems: $scope.selectedItems,
+        columnDefs: [
+          { field: 'name' },
+          { field: 'action',
+            enableEditCell: false,
+            cellTemplate: linkCellTemplate }
+        ]
+      };
+
+    }
+  ]
 );
