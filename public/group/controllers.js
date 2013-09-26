@@ -4,6 +4,7 @@ groupModule.controller(
     '$scope', '$state', 'groups',
     function($scope, $state, groups) {
       $scope.groups = groups;
+      $scope.world = groups[0];
     }
   ]);
 

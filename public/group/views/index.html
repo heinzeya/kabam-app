@@ -14,9 +14,9 @@
           <div class="panel-body">
             <ul>
               <li><a ui-sref="group.list">Main Organization List</a></li>
-              <li><a href="#">Main Profile</a></li>
-              <li><a href="#">Admins</a></li>
-              <li><a href="#">Members</a></li>
+              <li><a ui-sref="group.view({id: world._id})">Main Profile</a></li>
+              <li><a ui-sref="group.admin({id: world._id})">Admins</a></li>
+              <li><a ui-sref="group.member({id: world._id})">Members</a></li>
             </ul>
           </div>
         </div>
