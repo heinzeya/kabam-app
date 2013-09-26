@@ -19,18 +19,18 @@ groupModule.config([
           name: 'group',
           url: '/group',
           templateUrl: '/assets/group/views/index.html',
-          controller: 'GroupMainCtrl'
+          controller: 'GroupMainCtrl',
+          resolve: {
+            groups: function(GroupListLoader) {
+              return GroupListLoader();
+            }
+          }
         },
         {
           name: 'group.list',
           url: '/list',
           templateUrl: '/assets/group/views/list.html',
-          controller: 'GroupListCtrl',
-          resolve: {
-            'groups': function(GroupListLoader) {
-              return GroupListLoader;
-            }
-          }
+          controller: 'GroupListCtrl'
         },
         {
           name: 'group.view',
@@ -38,14 +38,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/view.html',
           controller: 'GroupViewCtrl',
           resolve: {
-            group: function(Group, $stateParams, $q) {
-              var delay = $q.defer();
-              Group.get({id: $stateParams.id}, function(group) {
-                delay.resolve(group);
-              }, function() {
-                delay.reject('Unable to fetch group ' + $stateParams.id);
-              });
-              return delay.promise;
+            group: function(GroupLoader, $stateParams) {
+              return GroupLoader($stateParams.id);
             }
           }
         },
@@ -73,14 +67,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/edit.html',
           controller: 'GroupEditCtrl',
           resolve: {
-            group: function(Group, $stateParams, $q) {
-              var delay = $q.defer();
-              Group.get({id: $stateParams.id}, function(group) {
-                delay.resolve(group);
-              }, function() {
-                delay.reject('Unable to fetch group ' + $stateParams.id);
-              });
-              return delay.promise;
+            group: function(GroupLoader, $stateParams) {
+              return GroupLoader($stateParams.id);
             }
           }
         },
@@ -90,14 +78,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/admin.html',
           controller: 'GroupAdminCtrl',
           resolve: {
-            group: function(Group, $stateParams, $q) {
-              var delay = $q.defer();
-              Group.get({id: $stateParams.id}, function(group) {
-                delay.resolve(group);
-              }, function() {
-                delay.reject('Unable to fetch group ' + $stateParams.id);
-              });
-              return delay.promise;
+            group: function(GroupLoader, $stateParams) {
+              return GroupLoader($stateParams.id);
             }
           }
         },
@@ -107,14 +89,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/member.html',
           controller: 'GroupMemberCtrl',
           resolve: {
-            group: function(Group, $stateParams, $q) {
-              var delay = $q.defer();
-              Group.get({id: $stateParams.id}, function(group) {
-                delay.resolve(group);
-              }, function() {
-                delay.reject('Unable to fetch group ' + $stateParams.id);
-              });
-              return delay.promise;
+            group: function(GroupLoader, $stateParams) {
+              return GroupLoader($stateParams.id);
             }
           }
         }

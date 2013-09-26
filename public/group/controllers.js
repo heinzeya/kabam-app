@@ -1,20 +1,18 @@
 groupModule.controller(
   'GroupMainCtrl',
   [
-    '$rootScope', '$scope', '$state',
-    function($rootScope, $scope, $state) {
-      $state.transitionTo('group.list');
-}]);
+    '$scope', '$state', 'groups',
+    function($scope, $state, groups) {
+      $scope.groups = groups;
+    }
+  ]);
 
 groupModule.controller(
   'GroupListCtrl',
   [
-    '$rootScope', '$scope', '$state', '$q', 'groups', 'Group',
-    function($rootScope, $scope, $state, $q, groups, Group) {
-      $scope.groups = groups;
-      $scope.groupRows = groups.map(function(group) {
-        group['action'] = group._id;
-      });
+    '$rootScope', '$scope', '$state',
+    function($rootScope, $scope, $state) {
+
       $scope.selectedItems = [];
       var linkCellTemplate = '<div class="ngCellText" ng-class="col.colIndex()">' +
             '<a href="#/group/view/{{row.getProperty(col.field)}}">View</a> | ' +
@@ -30,7 +28,8 @@ groupModule.controller(
           { field: 'tier' },
           { field: 'schoolId' },
           { field: 'courseId' },
-          { field: 'action',
+          { field: '_id',
+            displayName: 'Action',
             enableEditCell: false,
             cellTemplate: linkCellTemplate }
         ]
@@ -47,15 +46,6 @@ groupModule.controller(
         } else {
           $scope.groups.push(updatedGroup);
         }
-        // console.log('event groupUpdate captured', $scope.groups, updatedGroup);
-        // $scope.groups.push({_id:'123', 'name': 'test', 'uri': 'bbb'});
-        // Group.query(function(groups) {
-        //   $scope.groups = groups;
-        //   if (!$scope.$$phase) {
-        //     $scope.$apply();
-        //     console.log('apply');
-        //   }
-        // });
       });
     }
   ]

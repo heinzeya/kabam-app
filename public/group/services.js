@@ -8,10 +8,9 @@ groupServices.factory('Group', [
 ]);
 
 groupServices.factory('GroupLoader', [
-  'Group', '$stateParams', '$q',
+  'Group', '$q',
   function(Group, $q) {
-    var get = function(id) {
-      console.log('here');
+    return function(id) {
       var delay = $q.defer();
       Group.get({id: id}, function(group) {
         delay.resolve(group);
@@ -20,19 +19,20 @@ groupServices.factory('GroupLoader', [
       });
       return delay.promise;
     };
-    return { get: get };
   }
 ]);
 
 groupServices.factory('GroupListLoader', [
   'Group', '$q',
   function(Group, $q) {
-    var delay = $q.defer();
-    Group.query(function(groups) {
-      delay.resolve(groups);
-    }, function() {
-      delay.reject('Unable to fetch groups');
-    });
-    return delay.promise;
+    return function() {
+      var delay = $q.defer();
+      Group.query(function(groups) {
+        delay.resolve(groups);
+      }, function() {
+        delay.reject('Unable to fetch groups');
+      });
+      return delay.promise;
+    };
   }
 ]);
