@@ -1,102 +1,209 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="kabam">
-  <head>
+<html lang="en" dir="ltr"
+      xmlns:content="http://purl.org/rss/1.0/modules/content/"
+      xmlns:dc="http://purl.org/dc/terms/"
+      xmlns:foaf="http://xmlns.com/foaf/0.1/"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+      xmlns:sioc="http://rdfs.org/sioc/ns#"
+      xmlns:sioct="http://rdfs.org/sioc/types#"
+      xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+      xmlns:xsd="http://www.w3.org/2001/XMLSchema#">
+  <head profile="http://www.w3.org/1999/xhtml/vocab">
     <meta charset="utf-8">
-    <title ng-bind="$state.current.name">Kabam</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="[[description]]"/>
-    <meta name="keywords" content="[[keywords]]"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     [[#doIndex]]
     <meta name="robots" content="all"/>
     [[/doIndex]]
     [[^doIndex]]
     <meta name="robots" content="none">
     [[/doIndex]]
-    [[#css]]styles/bootstrap.united.css[[/css]]
-    [[#css]]font-awesome/css/font-awesome.css[[/css]]
-    [[#css]]select2/select2.css[[/css]]
-    [[#css]]ng-grid/ng-grid.css[[/css]]
-    [[#css]]styles/monimus.css[[/css]]
-    <link rel="shortcut icon" href="/favicon.ico">
+    <title>Welcome to monimus.com we are currently under construction.</title>
+    [[#css]]styles/system.base.css[[/css]]
+    <link type="text/css" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" media="all" />
+    [[#css]]styles/overrides.css[[/css]]
+    <!-- HTML5 element support for IE6-8 -->
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
   </head>
-  <body>
-    <div class="container">
-
-      <nav class="navbar navbar-default col-md-12" role="navigation">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Monimus</a>
-        </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-          <ul class="nav navbar-nav navbar-left" ng-show="authService.isAuthenticated()" ng-cloak>
-            <li><a ui-sref="group.list">Group</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right" ng-hide="authService.isAuthenticated()" ng-cloak>
-            <li><a ui-sref="login">Log in</a></li>
-            <li><a ui-sref="signup">Sign up</a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right" ng-show="authService.isAuthenticated()" ng-cloak>
-            <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
-            <li><a href="#" ng-click="authService.logOut()">Log out</a></li>
-          </ul>
-        </div>
-      </nav>
-
+  <body class="html front not-logged-in no-sidebars page-front-page" >
+    <div id="skip-link">
+      <a href="#main-content" class="element-invisible element-focusable">Skip to main content</a>
     </div>
+    <header id="navbar" role="banner" class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+          <a class="btn btn-navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <img id="menu_hover" src="/assets/images/front/icon_menu_hover.png" />
 
-    <div ui-view></div>
+          [[^user]]
+          <a class="logo pull-left" href="/" title="Home">
+            <img src="/assets/images/logo.png" alt="Home" />
+          </a>
+          [[/user]]
+          [[#user]]
+          <a class="logo pull-left" href="/home" title="Home">
+            <img src="/assets/images/logo.png" alt="Home" />
+          </a>
+          [[/user]]
 
-    <br>
-    <br>
-    <footer class="row">
-      <hr>
-      <span>&copy; 2013 - <a href="https://github.com/mykabam">Monimus</a></span>
-      |
-      <span><a href="#">Terms of Service</a> - <a href="#">Privacy Policy</a></span>
-      <span class="pull-right">
-        <a href="#">Status</a> -
-        <a href="#">Training</a> -
-        <a href="#">API</a> -
-        <a href="#">Blog</a> -
-        <a href="#">About</a>
-      </span>
-    </footer>
+          <div class="nav-collapse collapse">
+            <nav role="navigation">
+              <div class="region region-navigation">
+                <section id="block-block-4" class="block block-block clearfix">
 
-    <noscript>
-      <h1>Error!</h1>
-      <p>Enable javascript execution for this site!</p>
-    </noscript>
+                  <div id="frontpage-nav-bar">
+                    <ul class="block-main-menu"><li class="first"><a href="#" data-target="frontpage-start-tour">Meet Monimus</a></li>
+                      <li><a href="#" data-target="frontpage-teacher">Teachers</a></li>
+                      <li><a href="#" data-target="frontpage-student">Students</a></li>
+                      <li><a href="#" data-target="frontpage-organizations">Organizations</a></li>
+                      <li><a href="#" data-target="frontpage-contacts">Contact</a></li>
+                      <li class="last active"><a href="#" data-target="frontpage-request-invitation">request invitation</a></li>
+                    </ul><div class="block-secondary-menu">
+                      <ul><li><a href="#" data-target="frontpage-knowledge">Learn</a>      <a href="#" data-target="frontpage-reputation">Connect</a>      <a href="#" data-target="frontpage-connections">Succeed</a></li>
+                      </ul></div>
+                  </div>
 
-    <script type="text/javascript">
-     window.CONFIG = {
-       signUpURL: '/auth/signup',
-       loginURL: '/auth/login',
-       logoutURL: '/auth/logout',
-       recoveryURL: '/auth/restoreAccount',
-       profileEditURL: '/auth/myProfile'
-     };
-     window.USER = [[#user]][[& user ]][[/user]][[^user]]{}[[/user]];
+                </section> <!-- /.block -->
 
-     [[#flash]]
-     window.FLASH = {};
-     [[#error]]
-     window.FLASH.ERROR = "[[error]]";
-     [[/error]]
-     [[#success]]
-     window.FLASH.SUCCESS = "[[success]]";
-     [[/success]]
-     [[#info]]
-     window.FLASH.INFO = "[[info]]";
-     [[/info]]
-     [[/flash]]
+                <section id="block-bconfig-bootstrap-login" class="block block-bconfig clearfix">
 
-    </script>
+                  <ul class="nav pull-right">
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" href="#" data-toggle="dropdown">Sign in <strong class="caret"></strong></a>
+                      <div class="dropdown-menu embedded-form">
+                        <div id="ajax-user-login-wrapper">
 
-    [[#js]]loader.js[[/js]]
+                          <form action="/auth/login" method="post" id="user-login" accept-charset="UTF-8">
+                            <div>
+                              <div class="bootstrap-user-loginform-wrapper">
+
+                                [[#flash]]
+                                [[#error]]
+                                <div class="alert alert-error">
+                                  <strong>[[error]]</strong>
+                                </div>
+                                [[/error]]
+                                [[/flash]]
+
+                                <input type="hidden" name="_csrf" value="[[csrf]]"/>
+                                <div class="control-group form-type-textfield form-item-name form-item">
+                                  <label for="edit-name" class="control-label">Username <span class="form-required" title="This field is required.">*</span></label>
+                                  <div class="controls">
+                                    <input data-placeholder="Username" type="text" id="edit-name" name="username" value="" maxlength="60" class="form-text required" />
+                                    <p class="help-block">Enter your monimus.com username.</p>
+                                  </div>
+                                </div>
+
+                                <div class="control-group form-type-password form-item-pass form-item">
+                                  <label for="edit-pass" class="control-label">Password <span class="form-required" title="This field is required.">*</span></label>
+                                  <div class="controls">
+                                    <input data-placeholder="Password" data-input-type="password" type="password" id="edit-pass" name="password" maxlength="128" class="form-text required" />
+                                    <p class="help-block">Enter the password that accompanies your username.</p>
+                                  </div>
+                                </div>
+
+                                <ul>
+                                  <li class="first last"><a href="#">Connect with GitHub</a></li>
+                                </ul>
+
+                                <button class="btn form-submit" id="edit-submit" name="op" value="login to my account" type="submit">login to my account</button>
+                                <a href="/user/password" class="forgot-password">Forgot your password?</a>
+                                <div class="seperator"></div>
+                                <button class="btn form-submit btn-social googleplus" type="button">login with google+</button>
+                                <button class="btn form-submit btn-social linkedin" type="button">login with linkedin</button>
+                                <button class="btn form-submit btn-social github" type="button">login with github</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </section> <!-- /.block -->
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="highlighted">  <div class="region region-highlighted">
+      <section id="block-block-1" class="block block-block clearfix">
+
+
+        <div id="frontpage-request-invitation">
+          <div class="block-inner">
+            <div class="block-title">
+              Join the online<br />education revolution
+            </div>
+            <div class="block-content">
+              <!--<div class="submenus"><p>                <a href="#" class="knowledge"><img src="/assets/images/front/icon_knowledge.png" /></a><a href="#" class="reputation"><img src="/assets/images/front/icon_reputation.png" /></a><a href="#" class="connections"><img src="/assets/images/front/icon_connections.png" /></a>
+              </div>
+              <p>-->
+              <div class="block-form">
+                <p>Now available by invitation only</p>
+                <p>                <input type="text" name="email" id="frontpage_request_invitation_email" data-placeholder="Type your email" /><button id="frontpage_request_invitation_submit">get invited to my web class</button>
+                </p></div>
+            </div>
+          </div>
+        </div>
+
+      </section> <!-- /.block -->
+
+      [[& yield]]
+
+      <footer class="footer container">
+        <div class="region region-footer">
+          <section id="block-block-10" class="block block-block clearfix">
+
+
+            <div id="frontpage-contacts">
+              <div class="block-inner">
+                <div class="block-inner-inner">
+                  <div class="block-forms">
+                    <div class="block-forms-inner">
+                      <div class="emoticon"></div>
+                      <div class="block-title">Contact us<br /><span>We’d love to hear from you!</span></div>
+                      <div class="contact-information">
+                        <p><strong>Phone</strong><br />555.555.5555</p>
+                        <p><strong>Call us</strong><br />Company Name<br />Address Line 1<br />Address Line 2</p>
+                        <p><strong>Fax</strong><br />555.555.5555</p>
+                      </div>
+                      <form class="contact-form" method="post" action="/contacts/send">
+                        <div id="contact-form-message"></div>
+                        <p>                        <input type="text" name="name" data-placeholder="Your name" /><br /><input type="text" name="email" data-placeholder="Email address" /><br /><textarea name="message" data-placeholder="Message"></textarea><br /><button type="submit">send your message</button></p>
+                        <div style="display: none;"><input type="hidden" id="frontpage-contacts-hidden-prevent-field" name="prevent_code" value="XsXsXs,a.ssd#$$..." /></div>
+                      </form>
+                      <div class="clear"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section> <!-- /.block -->
+
+          <section id="block-block-11" class="block block-block clearfix">
+            <div class="footer-container">
+              <p class="copyright">© 2013 My Web Class<span>    |    </span><a href="#">Terms</a><span>  -  </span><a href="#">Privacy</a><span>  -  </span><a href="#">Security</a></p>
+              <p><a href="#">Status</a><span>  -  </span><a href="#">API</a><span>  -  </span><a href="#">Training</a><span>  -  <a href="#">Blog</a>  -  </span><a href="#">About</a></p>
+            </div>
+
+          </section> <!-- /.block -->
+        </div>
+      </footer>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+      <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+      [[#js]]front/main.js[[/js]]
   </body>
 </html>
