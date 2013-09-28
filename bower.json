@@ -7,14 +7,10 @@
     "angular-ui-utils": "*",
     "ng-grid": "*",
     "lodash": "*",
-    "angular-ui-select2": "~0.0.2",
-    "bootstrap": "~3.0.0"
+    "angular-ui-select2": "*"
   },
   "devDependencies": {
     "angular-mocks": "*",
     "chai": "*"
-  },
-  "resolutions": {
-    "bootstrap": "~3.0.0"
   }
 }
