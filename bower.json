@@ -7,7 +7,8 @@
     "angular-ui-utils": "*",
     "ng-grid": "*",
     "lodash": "*",
-    "angular-ui-select2": "*"
+    "angular-ui-select2": "*",
+    "angular-bootstrap": "~0.6.0"
   },
   "devDependencies": {
     "angular-mocks": "*",

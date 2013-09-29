@@ -7,7 +7,7 @@ body.not-front.not-logged-in .navbar-fixed-top { position: fixed; }
 body.not-front.not-logged-in .navbar-fixed-top .navbar-inner { padding: 0px; }
 .clear { clear: both; }
 
-.container, .navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container { width: 935px; }
+.navbar-static-top .container, .navbar-fixed-top .container, .navbar-fixed-bottom .container { width: 935px; }
 .nav-collapse.collapse { float: right; }
 
 body.front .container, body.front .navbar-static-top .container, body.front .navbar-fixed-bottom .container { width: 100%; }
