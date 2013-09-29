@@ -21,5 +21,7 @@
 
   "FACEBOOK_APP_ID": false,
   "FACEBOOK_APP_SECRET": false,
-  "__FACEBOOK_APP": "Parameters for setting oAUTH authorization for facebook. If both are false, github authorization is disabled. More information - http://developers.facebook.com/"
+  "__FACEBOOK_APP": "Parameters for setting oAUTH authorization for facebook. If both are false, github authorization is disabled. More information - http://developers.facebook.com/",
+
+  "mongoUrl": "mongodb://localhost/mwc_test"
 }

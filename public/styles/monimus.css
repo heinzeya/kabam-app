@@ -1,9 +1,33 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
+
 body {
-  padding-top: 40px;
+  padding-top: 60px;
 }
 
-.nav-collapse.collapse {
-  float: inherit;
+#navbar .navbar-inner {
+  background-color: white;
+  background-image: none;
+  height: 60px;
+  position: relative;
+}
+
+#navbar .navbar-inner .row-fluid {
+  position:absolute; top:50%; height:30px; margin-top:-15px;
+}
+
+#navbar .navbar-inner a {
+  font-size: 14px;
+  font-weight: 300;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 30px;
+  outline: none;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#navbar .navbar-inner a:hover,
+#navbar .navbar-inner a:focus {
+  color: #2980b9;
 }
 
 .grid-style {
