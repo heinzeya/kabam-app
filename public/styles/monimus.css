@@ -2,6 +2,7 @@
 
 body {
   padding-top: 60px;
+  padding-bottom: 60px;
 }
 
 #navbar .navbar-inner {
@@ -150,6 +151,12 @@ body {
 #subnav li > a {
   padding: 0px 14px;
   margin-top: 16px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0px;
+  padding: 8px 16px;
 }
 
 .grid-style {
