@@ -8,7 +8,7 @@
     "npm": "1.3.x"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "./node_modules/.bin/kabam-migrate && node index.js"
   },
   "bin": {
     "kabam": "bin/kabam.js"
@@ -18,11 +18,11 @@
     "url": "git://github.com/valmy/kabam-app.git"
   },
   "keywords": [],
-  "author": "valmy",
+  "author": "T. Budiman <tbudiman@gmail.com>",
   "license": "MIT",
   "contributors": [
     {
-      "name": "valmy",
+      "name": "T. Budiman <tbudiman@gmail.com>",
       "url": "https://github.com/valmy"
     }
   ],
@@ -31,7 +31,8 @@
     "commander": "1.3.2",
     "ncp": "*",
     "colors": "*",
-    "kabam": "git+https://github.com/mykabam/kabam.git"
+    "kabam": "git+https://github.com/mykabam/kabam.git",
+    "kabam-plugin-migrate": "git+https://github.com/mykabam/kabam-plugin-migrate.git"
   },
   "devDependencies": {
     "bower": "~1.2.6",

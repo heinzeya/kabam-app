@@ -39,21 +39,50 @@
           </a>
           [[/user]]
 
-          <div class="nav span1 pull-right"></div>
+          <form class="nav navbar-search">
+            <input type="text" class="search-query" placeholder="What can monimus help you find?">
+          </form>
 
-          <div class="nav-collapse collapse">
-            <ul class="nav" ng-show="authService.isAuthenticated()" ng-cloak>
-              <li><a ui-sref="group.list">Group</a></li>
-            </ul>
-            <ul class="nav pull-right" ng-show="authService.isAuthenticated()" ng-cloak>
-              <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
-              <li><a href="#" ng-click="authService.logOut()">Log out</a></li>
-            </ul>
-          </div>
+          <ul class="nav" ng-show="authService.isAuthenticated()" ng-cloak>
+            <li class="dashboard"><a ui-sref="group.list">Dashboard</a></li>
+            <li class="mycourses">
+              <a ui-sref="course">My Courses</a>
+            </li>
+            <li class="myportfolio"><a ui-sref="portfolio">My Portfolio</a></li>
+          </ul>
+
+          <ul class="nav pull-right" ng-show="authService.isAuthenticated()" ng-cloak>
+            <li class="dropdown message">
+              <span class="unread-count">0</span>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">User A: message</a></li>
+                <li><a href="#">User B: message</a></li>
+                <li><a href="#">User C: message</a></li>
+                <li><a href="#">User D: message</a></li>
+              </ul>
+            </li>
+            <li class="dropdown bell">
+              <span class="unread-count">0</span>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;</a>
+              <ul class="dropdown-menu">
+                <li><a href="#">notification 1</a></li>
+                <li><a href="#">notification 2</a></li>
+                <li><a href="#">notification 3</a></li>
+                <li><a href="#">notification 4</a></li>
+              </ul>
+            </li>
+            <li class="dropdown settings">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;</a>
+              <ul class="dropdown-menu">
+                <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
+                <li><a href="#" ng-click="authService.logOut()">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </header>
-
 
     <noscript>
       <h1>Error!</h1>
