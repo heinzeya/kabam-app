@@ -63,7 +63,8 @@ groupModule.controller(
         $state.go('group.edit', { id: $scope.group._id });
       };
 
-      $scope.addSubGroup = function() {
+      $scope.addSubGroup = function() {        
+        $state.go('group.subgroup', { id: $scope.group._id });
       };
 
       $scope.admin = function() {
@@ -81,9 +82,9 @@ groupModule.controller(
 groupModule.controller(
   'GroupEditCtrl',
   [
-    '$rootScope', '$scope', '$state', 'group',
-    function($rootScope, $scope, $state, group) {
-
+    '$rootScope', '$scope', '$state', 'group','$log',
+    function($rootScope, $scope, $state, group,$log) {
+      $log.log(group);
       $scope.group = group;
 
       $scope.save = function() {
@@ -185,3 +186,65 @@ groupModule.controller(
     }
   ]
 );
+
+groupModule.controller(
+  'SubgroupCtrl',
+  [
+    '$rootScope', '$scope', '$state', 'group','Group','$log',
+    function($rootScope, $scope, $state, group,Group,$log) {
+      
+      $log.log(group);
+
+      if(group.tier == 0){
+        $scope.types = [
+          { name: '1 - School / Organization',id:1 }
+        ];
+      }
+      else if(group.tier == 1){
+        $scope.types = [
+          { name: '2 - Course',id:2 }
+        ];
+      }
+      else if(group.tier == 2){
+        $scope.types = [
+          { name: '3 - group',id:3 }
+        ];
+      }
+      else{
+        $log.log('NO NEED');
+        return;
+      }
+
+      var newgroup = new Group({
+                'tier': 0,
+                'schoolId': null,
+                'courseId': null,
+                'isHidden': false,
+                'isOpenToParent': true,
+                'isOpenToAll': true,
+                'subgroups':[]
+              });
+
+      $scope.group = newgroup;
+
+      $scope.save = function() {
+        if($scope.group.tier == 1){
+          $log.log('schools');
+        }
+        if($scope.group.tier == 2){
+          $log.log('courses');
+          $scope.group.schoolId = $state.params.id;
+        }
+        if($scope.group.tier == 3){
+          $log.log('groups');
+          $scope.group.courseId = $state.params.id;
+          $scope.group.schoolId = group.schoolId;
+        }
+
+        $scope.group.$save(function(group) {
+          $state.go('group.list');
+          $rootScope.$broadcast('groupDataChange', $scope.group);
+        });
+      };
+    }
+  ])

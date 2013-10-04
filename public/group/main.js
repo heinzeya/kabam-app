@@ -56,7 +56,8 @@ groupModule.config([
                 'courseId': null,
                 'isHidden': false,
                 'isOpenToParent': true,
-                'isOpenToAll': true
+                'isOpenToAll': true,
+                'subgroups':[]
               });
             }
           }
@@ -88,6 +89,17 @@ groupModule.config([
           url: '/:id/member',
           templateUrl: '/assets/group/views/member.html',
           controller: 'GroupMemberCtrl',
+          resolve: {
+            group: function(GroupLoader, $stateParams) {
+              return GroupLoader($stateParams.id);
+            }
+          }
+        },
+        {
+          name: 'group.subgroup',
+          url: '/:id/subgroup',
+          templateUrl: '/assets/group/views/subgroup.html',
+          controller: 'SubgroupCtrl',
           resolve: {
             group: function(GroupLoader, $stateParams) {
               return GroupLoader($stateParams.id);
