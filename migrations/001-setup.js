@@ -1,23 +1,53 @@
-var kabamMigrate = require('kabam-plugin-migrate');
+var kabamMigrate = require('kabam-plugin-migrate'),
+  async = require('async');
 kabamMigrate.initMongoose();
 
 exports.up = function(next) {
 
-  var admin = new kabamMigrate.model.User({
-    email: 'admin@monimus.com',
-    username: 'kabamadmin',
-    apiKey: 'APIKEY',
-    root: true,
-    emailVerified: true,
-    profileComplete: true
-  });
-
-  admin.save(function(err, admin) {
-    if (err) {
-      console.error(err);
-    }
-    admin.setPassword('kabamadmin', function() {
-      console.log('Admin account added');
+  async.parallel([
+    function(callback) {
+      kabamMigrate.model.User.create({
+        email: 'admin@monimus.com',
+        username: 'kabamadmin',
+        root: true,
+        emailVerified: true,
+        profileComplete: true
+      }, function(err, admin) {
+        if (err) {
+          callback(err);
+        }
+        admin.setPassword('kabamadmin', callback);
+      });
+    },
+    function(callback) {
+      kabamMigrate.model.User.create({
+        email: 'user1@monimus.com',
+        username: 'user1',
+        root: false,
+        emailVerified: true,
+        profileComplete: true
+      }, function(err, user) {
+        if (err) {
+          callback(err);
+        }
+        user.setPassword('user1', callback);
+      });
+    },
+    function(callback) {
+      kabamMigrate.model.User.create({
+        email: 'user2@monimus.com',
+        username: 'user2',
+        root: false,
+        emailVerified: true,
+        profileComplete: true
+      }, function(err, user) {
+        if (err) {
+          callback(err);
+        }
+        user.setPassword('user2', callback);
+      });
+    },
+    function(callback) {
       kabamMigrate.model.Group.create({
         name: 'Main Site',
         uri: '/',
@@ -26,16 +56,41 @@ exports.up = function(next) {
         descriptionForMembers: 'Main Group'
       }, function(err, group) {
         if (err) {
-          console.error(err);
+          callback(err);
         }
-        console.log('World group added');
-        next();
+        callback(null, group);
       });
-    });
+    }
+  ], function(err, results) {
+    if (err) {
+      console.error(err);
+    }
+    console.log('Users kabamadmin, user1 and user2 added');
+    console.log('World group added');
+    next();
   });
 
 };
 
 exports.down = function(next) {
-  next();
+  async.parallel([
+    function(callback) {
+      kabamMigrate.model.User.findOneAndRemove({ username: 'kabamadmin' }, undefined, callback);
+    },
+    function(callback) {
+      kabamMigrate.model.User.findOneAndRemove({ username: 'user1' }, undefined, callback);
+    },
+    function(callback) {
+      kabamMigrate.model.User.findOneAndRemove({ username: 'user2' }, undefined, callback);
+    },
+    function(callback) {
+      kabamMigrate.model.Group.findOneAndRemove({ name: 'Main Site' }, undefined, callback);
+    }
+  ], function(err, results) {
+    if (err) {
+      console.error(err);
+    }
+    console.log('initial user and group removed');
+    next();
+  });
 };
