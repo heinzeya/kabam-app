@@ -14,6 +14,7 @@
 //= require auth/main.js
 
 //= require group/main.js
+//= require user/main.js
 //= require course/main.js
 //= require portfolio/main.js
 
@@ -24,6 +25,6 @@
 (function(){
   'use strict';
 
-  window.moduleDependencies = ['KabamGroup', 'Course', 'Portfolio'];
+  window.moduleDependencies = ['KabamGroup', 'KabamUser', 'Course', 'Portfolio'];
 
 })();

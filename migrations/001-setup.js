@@ -8,7 +8,8 @@ exports.up = function(next) {
     username: 'kabamadmin',
     apiKey: 'APIKEY',
     root: true,
-    emailVerified: true
+    emailVerified: true,
+    profileComplete: true
   });
 
   admin.save(function(err, admin) {
