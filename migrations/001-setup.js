@@ -7,7 +7,8 @@ exports.up = function(next) {
     email: 'admin@monimus.com',
     username: 'kabamadmin',
     apiKey: 'APIKEY',
-    root: true
+    root: true,
+    emailVerified: true
   });
 
   admin.save(function(err, admin) {
