@@ -164,6 +164,11 @@ footer {
   padding: 8px 16px;
 }
 
+.results h4 {
+  background-color: white;
+  padding: 4px;
+}
+
 .grid-style {
   height: 256px;
 }

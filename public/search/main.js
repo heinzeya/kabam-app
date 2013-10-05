@@ -39,8 +39,10 @@ searchModule.controller(
           });
       };
 
-      $log.log('stateParams', $stateParams);
-
+      $scope.courses = true;
+      $scope.documents = true;
+      $scope.schools = true;
+      $scope.students = true;
 
       $scope.updater = function(selected) {
         $scope.$apply(function() {
