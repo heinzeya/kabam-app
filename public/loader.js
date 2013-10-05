@@ -22,6 +22,7 @@
 //= require dashboard/main.js
 //= require course/main.js
 //= require portfolio/main.js
+//= require search/main.js
 
 //= require_self
 //= require kabam/app.js
@@ -30,6 +31,10 @@
 (function(){
   'use strict';
 
-  window.moduleDependencies = ['KabamGroup', 'KabamUser', 'Dashboard', 'Course', 'Portfolio'];
+  window.moduleDependencies = [
+    'KabamGroup', 'KabamUser',
+    'Dashboard', 'Course',
+    'Portfolio', 'Search'
+  ];
 
 })();

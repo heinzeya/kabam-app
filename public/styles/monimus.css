@@ -5,15 +5,13 @@ body {
   padding-bottom: 60px;
 }
 
+.nav, .pagination, .carousel a {  cursor: pointer; }
+
 #navbar .navbar-inner {
   background-color: white;
   background-image: none;
   height: 60px;
   position: relative;
-}
-
-#navbar .navbar-inner .row-fluid {
-
 }
 
 #navbar .navbar-inner a {
@@ -52,6 +50,13 @@ body {
 
 #navbar .navbar-search {
   margin-top: 15px;
+}
+
+#navbar .navbar-search input,
+input.search-box {
+  background: url(/assets/images/icon_search.png) no-repeat 7px 7px;
+  padding-left: 28px;
+  width: 320px;
 }
 
 #navbar li > a {

@@ -1,0 +1,42 @@
+<h2>Search</h2>
+
+<div class='container-fluid' ng-controller="TypeaheadCtrl">
+  <input type="text" class="search-box" ng-model="selected" data-provide="typeahead"
+         autocomplete="off" placeholder="What can monimus help you find?">
+</div>
+
+<h3 ng-show="selected">Search results for: {{ selected }}</h3>
+
+<section id="courses" class="results" ng-show="selected">
+  <h4>Courses <span class="badge badge-info">{{ results.courses.length }}</span></h4>
+  <div class="row-fluid" ng-repeat="course in results.courses">
+    <h5>{{ course.header }}</h5>
+    <p>{{ course.content }}</p>
+  </div>
+</section>
+
+<section id="documents" class="results" ng-show="selected">
+  <h4>Documents <span class="badge badge-info">{{ results.documents.length }}</span></h4>
+  <div class="row-fluid" ng-repeat="document in results.documents">
+    <h5>{{ document.header }}</h5>
+    <p>{{ document.content }}</p>
+  </div>
+</section>
+
+<section id="schools" class="results" ng-show="selected">
+  <h4>Schools <span class="badge badge-info">{{ results.schools.length }}</span></h4>
+  <div class="row-fluid" ng-repeat="school in results.schools">
+    <h5>{{ school.header }}</h5>
+    <p>{{ school.content }}</p>
+  </div>
+</section>
+
+<section id="students" class="results" ng-show="selected">
+  <h4>Students <span class="badge badge-info">{{ results.students.length }}</span></h4>
+  <div class="row-fluid" ng-repeat="student in results.students">
+    <h5>{{ student.header }}</h5>
+    <p>{{ student.content }}</p>
+  </div>
+</section>
+
+<pre>{{ results | json }}</pre>

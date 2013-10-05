@@ -41,9 +41,10 @@
           </a>
           [[/user]]
 
-          <form class="nav navbar-search">
-            <input type="text" class="search-query" placeholder="What can monimus help you find?">
-          </form>
+          <div class="nav navbar-search" ng-controller="TypeaheadCtrl">
+            <input type="text" class="top-search-box" ng-model="selected" data-provide="typeahead"
+                   autocomplete="off" placeholder="What can monimus help you find?">
+          </div>
 
           <ul class="nav" ng-show="authService.isAuthenticated()" ng-cloak>
             <li class="dashboard"><a ui-sref="dashboard">Dashboard</a></li>
