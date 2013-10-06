@@ -140,7 +140,7 @@ input.search-box {
 
 #subnav ul.nav li {
   float: left;
-  padding: 0px 18px;
+  padding: 0px 14px;
   height: 50px;
   position: relative;
 }
@@ -162,6 +162,7 @@ footer {
   position: fixed;
   bottom: 0px;
   padding: 8px 16px;
+  background-color: white;
 }
 
 .results h4 {

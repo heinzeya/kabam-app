@@ -1,18 +1,73 @@
-<div id="subnav" class="navbar span10 offset1">
+<div id="subnav" class="navbar span8 offset2">
   <div class="navbar-inner">
     <ul class="nav">
-      <li><a href="#">Overviews</a></li>
-      <li><a href="#">Discussions</a></li>
-      <li><a href="#">Assignments</a></li>
-      <li><a href="#">Grades</a></li>
-      <li><a href="#">Classmates</a></li>
+      <li><a ui-sref="course">Overview</a></li>
+      <li><a ui-sref="course">Discussions</a></li>
+      <li><a ui-sref="course">Assignments</a></li>
+      <li><a ui-sref="course">Grades</a></li>
+      <li><a ui-sref="course">Classmates</a></li>
+      <li><a ui-sref="course">Manage</a></li>
     </ul>
   </div>
 </div>
 
 <div class="clearfix"></div>
 
-<section class="row-fluid">
-<h2>Main Course</h2>
+<form class="form-horizontal span12">
+  <div class="control-group">
+    <label class="control-label" for="course">Course: </label>
+    <select>
+      <option>Course 1</option>
+      <option>Course 2</option>
+    </select>
+  </div>
+</form>
 
+<section class="row-fluid">
+  <div class="span4 well">
+    <h3 class="row-fluid">
+      28<br>Graded Assignments
+    </h3>
+    <h4>Recent</h4>
+    <ul>
+      <li>a</li>
+      <li>b</li>
+      <li>c</li>
+    </ul>
+    <a ui-sref="courses">View More</a>
+  </div>
+  <div class="span4 well">
+    <h3 class="row-fluid">
+      5<br>Upcoming Assignments
+    </h3>
+    <h4>Recent</h4>
+    <ul>
+      <li>a</li>
+      <li>b</li>
+      <li>c</li>
+    </ul>
+    <a ui-sref="courses">View More</a>
+  </div>
+  <div class="span4 well">
+    <h3 class="row-fluid">
+      25<br>Discussion Updates
+    </h3>
+    <h4>Recent</h4>
+    <ul>
+      <li>a</li>
+      <li>b</li>
+      <li>c</li>
+    </ul>
+    <a ui-sref="courses">View More</a>
+  </div>
+</section>
+
+<section class="row-fluid well">
+  <h4>Course News</h4>
+  <ul>
+    <li>a</li>
+    <li>b</li>
+    <li>c</li>
+  </ul>
+  <a ui-sref="courses">View More</a>
 </section>

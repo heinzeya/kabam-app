@@ -45,12 +45,22 @@ searchModule.controller(
       $scope.students = true;
 
       $scope.updater = function(selected) {
+        _.defer(function() {
         $scope.$apply(function() {
           $scope.selected = selected;
           $scope.search(selected, function(results) {
             $scope.results = results;
+            $log.log('results', $scope.results);
           });
         });
+        });
+      };
+
+      $scope.submit = function($event, selected) {
+        if ($event.keyCode == 13) {
+          $log.log('submit', $scope.selected);
+          $scope.updater($scope.selected);
+        }
       };
 
       $scope.topUpdater = function(selected) {
