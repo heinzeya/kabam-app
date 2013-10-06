@@ -43,7 +43,8 @@
 
           <div class="nav navbar-search" ng-controller="TypeaheadCtrl">
             <input type="text" class="top-search-box" ng-model="selected" data-provide="typeahead"
-                   autocomplete="off" placeholder="What can monimus help you find?">
+                   autocomplete="off" placeholder="What can monimus help you find?"
+                   ng-keypress="submit($event)">
           </div>
 
           <ul class="nav" ng-show="authService.isAuthenticated()" ng-cloak>
@@ -100,7 +101,6 @@
 
     <div class="container-fluid">
       <footer class="row-fluid span12">
-        <hr>
         <span>&copy; 2013 - <a href="https://github.com/mykabam">Monimus</a></span>
         |
         <span><a href="#">Terms of Service</a> - <a href="#">Privacy Policy</a></span>
