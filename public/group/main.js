@@ -4,6 +4,7 @@
 
 var groupModule = angular.module('KabamGroup',
                                  ['Group.services',
+                                  'User.services',
                                   'ui.router',
                                   'ui.bootstrap',
                                   'ui.select2',

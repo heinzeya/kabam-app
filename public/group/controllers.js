@@ -63,7 +63,7 @@ groupModule.controller(
         $state.go('group.edit', { id: $scope.group._id });
       };
 
-      $scope.addSubGroup = function() {        
+      $scope.addSubGroup = function() {
         $state.go('group.subgroup', { id: $scope.group._id });
       };
 
@@ -155,8 +155,8 @@ groupModule.controller(
 groupModule.controller(
   'GroupMemberCtrl',
   [
-    '$rootScope', '$scope', '$state', 'group',
-    function($rootScope, $scope, $state, group) {
+    '$rootScope', '$scope', '$state', 'group', 'UserSearch',
+    function($rootScope, $scope, $state, group, UserSearch) {
 
       $scope.group = group;
 
@@ -183,6 +183,8 @@ groupModule.controller(
         ]
       };
 
+      $scope.users = UserSearch('user');
+
     }
   ]
 );
@@ -192,7 +194,7 @@ groupModule.controller(
   [
     '$rootScope', '$scope', '$state', 'group','Group','$log',
     function($rootScope, $scope, $state, group,Group,$log) {
-      
+
       $log.log(group);
 
       if(group.tier == 0){

@@ -59,7 +59,6 @@ searchModule.controller(
 
       $scope.submit = function($event) {
         if ($event.keyCode == 13) {
-          $log.log('submit', $scope.selected);
           $scope.topUpdater($scope.selected);
         }
       };

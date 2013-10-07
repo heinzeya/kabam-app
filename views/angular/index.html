@@ -80,8 +80,8 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">&nbsp;</a>
               <ul class="dropdown-menu">
                 <li><a ui-sref="profile">{{ authService.user.username }}</a></li>
-                <li><a ui-sref="group.list">Group Management</a></li>
-                <li><a ui-sref="user.list">User Management</a></li>
+                <li><a ui-sref="group.list" ng-show="authService.user.root">Group Management</a></li>
+                <li><a ui-sref="user.list" ng-show="authService.user.root">User Management</a></li>
                 <li><a href="#" ng-click="authService.logOut()">Logout</a></li>
               </ul>
             </li>
