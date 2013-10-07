@@ -126,9 +126,9 @@ groupModule.controller(
       $scope.group = group;
 
       $scope.admins = [
-        { name: 'AAA', action: '0' },
-        { name: 'BBB', action: '1' },
-        { name: 'CCC', action: '2' }
+        { name: 'AAA', action: 'a' },
+        { name: 'BBB', action: 'b' },
+        { name: 'CCC', action: 'c' }
       ];
 
       var linkCellTemplate = '<div class="ngCellText" ng-class="col.colIndex()">' +
@@ -155,8 +155,8 @@ groupModule.controller(
 groupModule.controller(
   'GroupMemberCtrl',
   [
-    '$rootScope', '$scope', '$state', 'group', 'UserSearch',
-    function($rootScope, $scope, $state, group, UserSearch) {
+    '$rootScope', '$scope', '$log', '$state', 'group', 'UserSearch',
+    function($rootScope, $scope, $log, $state, group, UserSearch) {
 
       $scope.group = group;
 
@@ -184,6 +184,13 @@ groupModule.controller(
       };
 
       $scope.users = UserSearch('user');
+
+      $scope.$watch('member', function(newVal, oldVal, scope) {
+        if ($scope.member && !_.find($scope.members, {action: $scope.member})) {
+          var newMember = _.find($scope.users.$$v, { '_id': $scope.member.toString() });
+          $scope.members.push({ name: newMember.username, action: newMember._id });
+        }
+      });
 
     }
   ]

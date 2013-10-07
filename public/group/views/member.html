@@ -9,8 +9,7 @@
   <div class="controls">
     <select ui-select2 ng-model="member" data-placeholder="Add a member">
       <option value=""></option>
+      <option ng-repeat="user in users" value="{{user._id}}">{{user.username}}</option>
     </select>
   </div>
 </div>
-
-{{ users | json }}
