@@ -161,9 +161,9 @@ groupModule.controller(
       $scope.group = group;
 
       $scope.members = [
-        { name: 'AAA', action: '0' },
-        { name: 'BBB', action: '1' },
-        { name: 'CCC', action: '2' }
+        { name: 'AAA', action: 'a' },
+        { name: 'BBB', action: 'b' },
+        { name: 'CCC', action: 'c' }
       ];
 
       var linkCellTemplate = '<div class="ngCellText" ng-class="col.colIndex()">' +
@@ -187,8 +187,10 @@ groupModule.controller(
 
       $scope.$watch('member', function(newVal, oldVal, scope) {
         if ($scope.member && !_.find($scope.members, {action: $scope.member})) {
-          var newMember = _.find($scope.users.$$v, { '_id': $scope.member.toString() });
-          $scope.members.push({ name: newMember.username, action: newMember._id });
+          $scope.users.then(function(users) {
+            var newMember = _.find(users, { '_id': $scope.member.toString() });
+            $scope.members.push({ name: newMember.username, action: newMember._id });
+          });
         }
       });
 
@@ -256,4 +258,4 @@ groupModule.controller(
         });
       };
     }
-  ])
+  ]);

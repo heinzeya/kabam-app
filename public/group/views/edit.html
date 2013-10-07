@@ -1,6 +1,9 @@
-<h2>Edit Group</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Edit Group</h2>
+  </div>
 
-<div>id: {{group._id}}</div>
+  <div class="panel-body">
 
 <form name="groupForm" ng-submit="save()" class="form-horizontal">
 
@@ -77,11 +80,11 @@
     </label>
   </div>
 
-  <br>
-
   <div class="form-actions">
     <button class="btn btn-primary">Save</button>
     <button type="button" ng-click="remove()" ng-show="!group.id" class="btn">Delete</button>
   </div>
 
 </form>
+</div>
+</div>
