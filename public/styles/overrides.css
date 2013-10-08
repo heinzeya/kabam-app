@@ -354,3 +354,9 @@ body.page-user-register .page-header { display: none; }
 .bootstrap-logged-in-menu ul.nav li.message > .dropdown-menu .message-open-center a { height: 30px; line-height: 30px; display: block; background-color: #ecf0f1; color: #474747; font-size: 14px; text-indent: 11px; text-decoration: none; }
 
 #block-privatemsg-privatemsg-new { float: left; display: none; }
+
+form#user-login a.btn-primary {
+  padding: 4px 30px;
+  font-size: 16px;
+  margin: 10px 10px;
+}

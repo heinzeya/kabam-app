@@ -47,9 +47,9 @@
       <div>
         <br/>
         <h4>or</h4>
-        <a href="/auth/google?redirect=/" class="btn btn-default"><span class="glyphicon icon-google-plus"></span> &nbsp; Login with Google</a>
-        <a href="/auth/google?redirect=/" class="btn btn-default disabled"><span class="glyphicon icon-github"></span> &nbsp; Login with Github</a>
-        <a href="/auth/google?redirect=/" class="btn btn-default disabled"><span class="glyphicon icon-linkedin"></span> &nbsp; Login with LinkedIn</a>
+        <a auth-strategy="google" success-redirect="/profile" class="btn"><span class="glyphicon icon-google-plus"></span> &nbsp; Login with Google</a>
+        <a auth-strategy="github" success-redirect="/profile" class="btn"><span class="glyphicon icon-github"></span> &nbsp; Login with Github</a>
+        <a auth-strategy="linkedin" success-redirect="/profile" class="btn"><span class="glyphicon icon-linkedin"></span> &nbsp; Login with LinkedIn</a>
       </div>
     </form>
   </div>
