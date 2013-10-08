@@ -1,0 +1,6 @@
+#remote-video-container {
+  -webkit-transition: 1s;
+}
+#chat-content {
+  overflow-y: auto;
+}
