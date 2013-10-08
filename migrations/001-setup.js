@@ -1,3 +1,10 @@
+/**
+ * Setup dummy users. This setup only works if the kabam_dev is not created yet,
+ * so we need to drop the kabam_dev database first, before we run kabam-migrate.
+ * 
+ * TODO it might be great if we can let this setup also drop the kabam_dev
+ *      database instead of do it manually.
+ */
 var kabamMigrate = require('kabam-plugin-migrate'),
   async = require('async');
 kabamMigrate.initMongoose();
@@ -48,6 +55,34 @@ exports.up = function(next) {
       });
     },
     function(callback) {
+      kabamMigrate.model.User.create({
+        email: 'caller1@monimus.com',
+        username: 'caller1',
+        root: true,
+        emailVerified: true,
+        profileComplete: true
+      }, function(err, user) {
+        if (err) {
+          callback(err);
+        }
+        user.setPassword('caller1', callback);
+      });
+    },
+    function(callback) {
+      kabamMigrate.model.User.create({
+        email: 'caller2@monimus.com',
+        username: 'caller2',
+        root: true,
+        emailVerified: true,
+        profileComplete: true
+      }, function(err, user) {
+        if (err) {
+          callback(err);
+        }
+        user.setPassword('caller2', callback);
+      });
+    },
+    function(callback) {
       kabamMigrate.model.Group.create({
         name: 'Main Site',
         uri: '/',
@@ -75,16 +110,24 @@ exports.up = function(next) {
 exports.down = function(next) {
   async.parallel([
     function(callback) {
-      kabamMigrate.model.User.findOneAndRemove({ username: 'kabamadmin' }, undefined, callback);
+      kabamMigrate.model.User.findOneAndRemove({
+        username: 'kabamadmin'
+      }, undefined, callback);
     },
     function(callback) {
-      kabamMigrate.model.User.findOneAndRemove({ username: 'user1' }, undefined, callback);
+      kabamMigrate.model.User.findOneAndRemove({
+        username: 'user1'
+      }, undefined, callback);
     },
     function(callback) {
-      kabamMigrate.model.User.findOneAndRemove({ username: 'user2' }, undefined, callback);
+      kabamMigrate.model.User.findOneAndRemove({
+        username: 'user2'
+      }, undefined, callback);
     },
     function(callback) {
-      kabamMigrate.model.Group.findOneAndRemove({ name: 'Main Site' }, undefined, callback);
+      kabamMigrate.model.Group.findOneAndRemove({
+        name: 'Main Site'
+      }, undefined, callback);
     }
   ], function(err, results) {
     if (err) {
