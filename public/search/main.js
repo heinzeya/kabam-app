@@ -50,8 +50,7 @@ searchModule.controller(
             $scope.selected = selected;
             $scope.search(selected, function(results) {
               $scope.selected = $scope.selected;
-              $scope.results = results;
-              $log.log('results', $scope.selected, $scope.results);
+              $scope.results = results.results;
             });
           });
         });
@@ -75,7 +74,7 @@ searchModule.controller(
       if ($stateParams.query) {
         $scope.selected = $stateParams.query;
         $scope.search($stateParams.query, function(results) {
-          $scope.results = results;
+          $scope.results = results.results;
         });
       } else {
         $scope.selected = undefined;
