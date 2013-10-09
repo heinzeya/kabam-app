@@ -57,8 +57,7 @@ groupModule.config([
                 'courseId': null,
                 'isHidden': false,
                 'isOpenToParent': true,
-                'isOpenToAll': true,
-                'subgroups':[]
+                'isOpenToAll': true
               });
             }
           }
@@ -104,6 +103,16 @@ groupModule.config([
           resolve: {
             group: function(GroupLoader, $stateParams) {
               return GroupLoader($stateParams.id);
+            },
+            school: function(GroupLoader,group,$log){
+                if(group.schoolId == null)
+                  return null;
+                return GroupLoader(group.schoolId);
+            },
+            course: function(GroupLoader,group,$log){               
+                if(group.courseId == null)
+                  return null;
+                return GroupLoader(group.courseId);
             }
           }
         }

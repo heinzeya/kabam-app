@@ -1,6 +1,9 @@
-<h2>Add Sub-Group</h2>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h2 class="panel-title">Add {{grouptype}}</h2>
+  </div>
 
-<form name="groupForm" ng-submit="save()" class="form-horizontal">
+  <form name="groupForm" ng-submit="save()" class="form-horizontal">
 
   <div class="control-group">
     <label class="control-label" for="name">Name</label>
@@ -19,8 +22,8 @@
   <div class="control-group">
     <label class="control-label" for="tier">Tier</label>
     <div class="controls">
-      <select ui-select2="tierOptions" ng-model="group.tier" data-placeholder="Choose groups tier" 
-        id="tier">
+      <select ui-select2="tierOptions" ng-model="group.tier"  
+        id="tier" disabled>
           <option value=""></option>
           <option ng-repeat="type in types" value={{type.id}}>{{type.name}}</option>
       </select>
@@ -28,19 +31,16 @@
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="schoolId">School</label>
+    <label class="control-label" for="schoolname">School Name:</label>
     <div class="controls">
-      <select ui-select2 ng-model="group.schoolId" data-placeholder="Pick a school" disabled>
-        <option value=""></option>
-        <option ng-repeat="school in schools" value="{{school._id}}">{{school.name}}</option>
-      </select>
+      <input ng-model="schoolname" class="input-xlarge" id="schoolname" disabled>
     </div>
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="courseId">Course</label>
+    <label class="control-label" for="coursename">Course Name:</label>
     <div class="controls">
-      <input ng-model="group.courseId" class="input-xlarge" id="courseId" disabled>
+      <input ng-model="coursename" class="input-xlarge" id="coursename" disabled>
     </div>
   </div>
 
@@ -81,3 +81,4 @@
   </div>
 
 </form>
+</div>

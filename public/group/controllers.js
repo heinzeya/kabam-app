@@ -55,9 +55,15 @@ groupModule.controller(
 groupModule.controller(
   'GroupViewCtrl',
   [
-    '$scope', '$state', 'group',
-    function($scope, $state, group) {
+    '$scope', '$state', 'group', '$log',
+    function($scope, $state, group ,$log) {
       $scope.group = group;
+      $scope.isDisabled = false;
+      if(group.tier == 3){
+        $log.log('disableing for tier3');
+        $scope.isDisabled = true;
+      }
+
 
       $scope.edit = function() {
         $state.go('group.edit', { id: $scope.group._id });
@@ -201,22 +207,47 @@ groupModule.controller(
 groupModule.controller(
   'SubgroupCtrl',
   [
-    '$rootScope', '$scope', '$state', 'group','Group','$log',
-    function($rootScope, $scope, $state, group,Group,$log) {
+    '$rootScope', '$scope', '$state', 'group','Group','school','course','$log',
+    function($rootScope, $scope, $state, group,Group,school,course,$log) {
 
-      $log.log(group);
+      var newgroup = new Group({
+                'tier': 0,
+                'schoolId': null,
+                'courseId': null,
+                'isHidden': false,
+                'isOpenToParent': true,
+                'isOpenToAll': true
+              });
+
+      $scope.group = newgroup;
+
+      if(school)
+        $scope.schoolname = school.name;
+      if(course)
+        $scope.coursename = course.name;
 
       if(group.tier == 0){
+        $scope.grouptype = 'School / Organization';
+        $scope.group.tier = 1;
+        $log.log('constructing school');
         $scope.types = [
           { name: '1 - School / Organization',id:1 }
         ];
       }
       else if(group.tier == 1){
+        $scope.grouptype = 'Course';
+        $scope.group.tier = 2;
+        $log.log('constructing course');
+        $scope.schoolname = group.name;
         $scope.types = [
           { name: '2 - Course',id:2 }
         ];
       }
       else if(group.tier == 2){
+        $scope.grouptype = 'group';
+        $scope.group.tier = 3;
+        $log.log('constructing group');
+        $scope.coursename = group.name;
         $scope.types = [
           { name: '3 - group',id:3 }
         ];
@@ -226,19 +257,8 @@ groupModule.controller(
         return;
       }
 
-      var newgroup = new Group({
-                'tier': 0,
-                'schoolId': null,
-                'courseId': null,
-                'isHidden': false,
-                'isOpenToParent': true,
-                'isOpenToAll': true,
-                'subgroups':[]
-              });
-
-      $scope.group = newgroup;
-
       $scope.save = function() {
+        
         if($scope.group.tier == 1){
           $log.log('schools');
         }
@@ -253,6 +273,7 @@ groupModule.controller(
         }
 
         $scope.group.$save(function(group) {
+          //$log.log(group);
           $state.go('group.list');
           $rootScope.$broadcast('groupDataChange', $scope.group);
         });
