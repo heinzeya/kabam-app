@@ -5,18 +5,18 @@
   var userId;
   var roomsList = document.getElementById('rooms-list');
 
-
-  // ANGULAR CONTROLLER
-
   function RoomController($scope, $http) {
-    $scope.messages = [];
+
+    $scope.room = {
+      messages: [],
+      newMessage: ''
+    };
 
     $scope.sendMessage = function() {
-      //console.log($scope.chatMessage);
       socket.emit('chat:newMessage', {
-        content: $scope.chatMessage
+        content: $scope.room.newMessage
       });
-      $scope.chatMessage = "";
+      $scope.room.newMessage = '';
     }
 
     $scope.startBroadcasting = function() {
@@ -25,7 +25,7 @@
 
     socket.on('chat:newMessage', function(data) {
       //console.log(data);
-      $scope.messages.push(data);
+      $scope.room.messages.push(data);
       $scope.$apply();
     });
 
@@ -34,7 +34,7 @@
       //console.log(data);
       if (roomId == data.roomid) {
         $('#' + data.userid).remove();
-        $scope.messages.push(data);
+        $scope.room.messages.push(data);
         $scope.$apply();
       }
     });
