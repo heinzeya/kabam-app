@@ -88,22 +88,42 @@ groupModule.controller(
 groupModule.controller(
   'GroupEditCtrl',
   [
-    '$rootScope', '$scope', '$state', 'group','$log',
-    function($rootScope, $scope, $state, group,$log) {
+    '$rootScope', '$scope', '$state', 'Restangular', 'group','$log',
+    function($rootScope, $scope, $state, Restangular, group, $log) {
+      if (group) {
+        $scope.newGroup = false;
+        $scope.group = Restangular.copy(group);
+      } else {
+        $scope.newGroup = true;
+        $scope.group = {
+          'tier': 0,
+          'schoolId': null,
+          'courseId': null,
+          'isHidden': false,
+          'isOpenToParent': true,
+          'isOpenToAll': true
+        };
+      }
       $log.log(group);
-      $scope.group = group;
 
       $scope.save = function() {
-        if ($scope.group.schoolId === '') {
-          $scope.group.schoolId = null;
+        // if ($scope.group.schoolId === '') {
+        //   $scope.group.schoolId = null;
+        // }
+        // if ($scope.group.courseId === '') {
+        //   $scope.group.courseId = null;
+        // }
+        if ($scope.newGroup) {
+          $scope.postGroup($scope.group).then(function(group) {
+            $state.go('group.list');
+            $rootScope.$broadcast('groupDataChange', $scope.group);
+          });
+        } else {
+          $scope.group.put().then(function(group) {
+            $state.go('group.list');
+            $rootScope.$broadcast('groupDataChange', $scope.group);
+          });
         }
-        if ($scope.group.courseId === '') {
-          $scope.group.courseId = null;
-        }
-        $scope.group.$save(function(group) {
-          $state.go('group.list');
-          $rootScope.$broadcast('groupDataChange', $scope.group);
-        });
       };
 
       $scope.tierOptions = {
@@ -207,17 +227,17 @@ groupModule.controller(
 groupModule.controller(
   'SubgroupCtrl',
   [
-    '$rootScope', '$scope', '$state', 'group','Group','school','course','$log',
-    function($rootScope, $scope, $state, group,Group,school,course,$log) {
+    '$rootScope', '$scope', '$state', 'group', 'GroupService', 'school', 'course', '$log',
+    function($rootScope, $scope, $state, group, GroupService, school, course, $log) {
 
-      var newgroup = new Group({
-                'tier': 0,
-                'schoolId': null,
-                'courseId': null,
-                'isHidden': false,
-                'isOpenToParent': true,
-                'isOpenToAll': true
-              });
+      var newgroup = {
+        'tier': 0,
+        'schoolId': null,
+        'courseId': null,
+        'isHidden': false,
+        'isOpenToParent': true,
+        'isOpenToAll': true
+      };
 
       $scope.group = newgroup;
 
@@ -258,7 +278,7 @@ groupModule.controller(
       }
 
       $scope.save = function() {
-        
+
         if($scope.group.tier == 1){
           $log.log('schools');
         }
@@ -272,7 +292,7 @@ groupModule.controller(
           $scope.group.schoolId = group.schoolId;
         }
 
-        $scope.group.$save(function(group) {
+        GroupService.postGroup($scope.group).then(function(group) {
           //$log.log(group);
           $state.go('group.list');
           $rootScope.$broadcast('groupDataChange', $scope.group);

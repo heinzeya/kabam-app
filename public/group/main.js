@@ -3,7 +3,8 @@
 //=require ./controllers.js
 
 var groupModule = angular.module('KabamGroup',
-                                 ['Group.services',
+                                 ['restangular',
+                                  'Group.services',
                                   'User.services',
                                   'ui.router',
                                   'ui.bootstrap',
@@ -12,8 +13,9 @@ var groupModule = angular.module('KabamGroup',
                                  ]);
 
 groupModule.config([
-  'kabamStatesProvider',
-  function(kabamStatesProvider) {
+  'kabamStatesProvider', 'RestangularProvider',
+  function(kabamStatesProvider, RestangularProvider) {
+    RestangularProvider.setBaseUrl('/api/rest');
     kabamStatesProvider
       .push([
         {
@@ -22,8 +24,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/index.html',
           controller: 'GroupMainCtrl',
           resolve: {
-            groups: function(GroupListLoader) {
-              return GroupListLoader();
+            groups: function(GroupService) {
+              return GroupService.getGroups();
             }
           }
         },
@@ -39,8 +41,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/view.html',
           controller: 'GroupViewCtrl',
           resolve: {
-            group: function(GroupLoader, $stateParams) {
-              return GroupLoader($stateParams.id);
+            group: function(GroupService, $stateParams) {
+              return GroupService.getGroup($stateParams.id);
             }
           }
         },
@@ -50,15 +52,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/edit.html',
           controller: 'GroupEditCtrl',
           resolve: {
-            'group': function(Group) {
-              return new Group({
-                'tier': 0,
-                'schoolId': null,
-                'courseId': null,
-                'isHidden': false,
-                'isOpenToParent': true,
-                'isOpenToAll': true
-              });
+            'group': function() {
+              return {};
             }
           }
         },
@@ -68,8 +63,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/edit.html',
           controller: 'GroupEditCtrl',
           resolve: {
-            group: function(GroupLoader, $stateParams) {
-              return GroupLoader($stateParams.id);
+            group: function(GroupService, $stateParams) {
+              return GroupService.getGroup($stateParams.id);
             }
           }
         },
@@ -79,8 +74,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/admin.html',
           controller: 'GroupAdminCtrl',
           resolve: {
-            group: function(GroupLoader, $stateParams) {
-              return GroupLoader($stateParams.id);
+            group: function(GroupService, $stateParams) {
+              return GroupService.getGroup($stateParams.id);
             }
           }
         },
@@ -90,8 +85,8 @@ groupModule.config([
           templateUrl: '/assets/group/views/member.html',
           controller: 'GroupMemberCtrl',
           resolve: {
-            group: function(GroupLoader, $stateParams) {
-              return GroupLoader($stateParams.id);
+            group: function(GroupService, $stateParams) {
+              return GroupService.getGroup($stateParams.id);
             }
           }
         },
@@ -101,18 +96,20 @@ groupModule.config([
           templateUrl: '/assets/group/views/subgroup.html',
           controller: 'SubgroupCtrl',
           resolve: {
-            group: function(GroupLoader, $stateParams) {
-              return GroupLoader($stateParams.id);
+            group: function(GroupService, $stateParams) {
+              return GroupService.getGroup($stateParams.id);
             },
-            school: function(GroupLoader,group,$log){
-                if(group.schoolId == null)
+            school: function(GroupService, group) {
+                if (group.schoolId == null) {
                   return null;
-                return GroupLoader(group.schoolId);
+                }
+                return GroupService.getGroup(group.schoolId);
             },
-            course: function(GroupLoader,group,$log){               
-                if(group.courseId == null)
+            course: function(GroupService, group) {
+                if(group.courseId == null) {
                   return null;
-                return GroupLoader(group.courseId);
+                }
+                return GroupService.getGroup(group.courseId);
             }
           }
         }
