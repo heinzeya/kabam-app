@@ -7,7 +7,7 @@
   <div class="control-group">
     <label class="control-label" for="username">Username</label>
     <div class="controls">
-      <input ng-model="user.username" class="input-xlarge" id="username" disabled>
+      <input ng-model="user.username" class="input-xlarge" id="username" ng-disabled="!newUser">
     </div>
   </div>
 
@@ -48,16 +48,17 @@
   </div>
 
   <div class="control-group checkbox">
-    <label class="control-label" for="isBanned">
-      Banned
-    </label>
-    <input type="checkbox" ng-model="user.isBanned" id="isBanned">
+    <label class="control-label" for="isBanned">Banned</label>
+    <div class="controls">
+      <input type="checkbox" ng-model="user.isBanned" id="isBanned">
+    </div>
   </div>
 
   <div class="control-group checkbox">
-    <label class="control-label" for="root">
-      <input type="checkbox" ng-model="user.root" id="root"> Global Admin
-    </label>
+    <label class="control-label" for="root">Global Admin</label>
+    <div class="controls">
+      <input type="checkbox" ng-model="user.root" id="root">
+    </div>
   </div>
 
   <br>

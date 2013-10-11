@@ -3,7 +3,8 @@
 //=require ./controllers.js
 
 var userModule = angular.module('KabamUser',
-                                 ['User.services',
+                                 ['restangular',
+                                  'User.services',
                                   'ui.router',
                                   'ui.bootstrap',
                                   'ui.select2',
@@ -11,8 +12,9 @@ var userModule = angular.module('KabamUser',
                                  ]);
 
 userModule.config([
-  'kabamStatesProvider',
-  function(kabamStatesProvider) {
+  'kabamStatesProvider', 'RestangularProvider',
+  function(kabamStatesProvider, RestangularProvider) {
+    RestangularProvider.setBaseUrl('/api/rest');
     kabamStatesProvider
       .push([
         {
@@ -21,8 +23,8 @@ userModule.config([
           templateUrl: '/assets/user/views/index.html',
           controller: 'UserMainCtrl',
           resolve: {
-            users: function(UserListLoader) {
-              return UserListLoader();
+            users: function(UserService) {
+              return UserService.getUsers();
             }
           }
         },
@@ -38,8 +40,8 @@ userModule.config([
           templateUrl: '/assets/user/views/view.html',
           controller: 'UserViewCtrl',
           resolve: {
-            user: function(UserLoader, $stateParams) {
-              return UserLoader($stateParams.id);
+            user: function(UserService, $stateParams) {
+              return UserService.getUser($stateParams.id);
             }
           }
         },
@@ -49,15 +51,8 @@ userModule.config([
           templateUrl: '/assets/user/views/edit.html',
           controller: 'UserEditCtrl',
           resolve: {
-            'user': function(User) {
-              return new User({
-                'tier': 0,
-                'schoolId': null,
-                'courseId': null,
-                'isHidden': false,
-                'isOpenToParent': true,
-                'isOpenToAll': true
-              });
+            'user': function() {
+              return null;
             }
           }
         },
@@ -67,8 +62,8 @@ userModule.config([
           templateUrl: '/assets/user/views/edit.html',
           controller: 'UserEditCtrl',
           resolve: {
-            user: function(UserLoader, $stateParams) {
-              return UserLoader($stateParams.id);
+            user: function(UserService, $stateParams) {
+              return UserService.getUser($stateParams.id);
             }
           }
         }

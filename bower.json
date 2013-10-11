@@ -9,7 +9,8 @@
     "lodash": "*",
     "angular-ui-select2": "*",
     "angular-bootstrap": "*",
-    "angular-ui-calendar": "*"
+    "angular-ui-calendar": "*",
+    "restangular": "*"
   },
   "devDependencies": {
     "angular-mocks": "*",

@@ -82,22 +82,44 @@ userModule.controller(
 userModule.controller(
   'UserEditCtrl',
   [
-    '$rootScope', '$scope', '$state', 'user',
-    function($rootScope, $scope, $state, user) {
+    '$rootScope', '$scope', '$state', '$log', 'Restangular', 'UserService', 'user',
+    function($rootScope, $scope, $state, $log, Restangular, UserService, user) {
 
-      $scope.user = user;
+      $log.log('user', user);
+      if (!user) {
+        $scope.newUser = true;
+        $scope.user = {
+          'tier': 0,
+          'schoolId': null,
+          'courseId': null,
+          'isHidden': false,
+          'isOpenToParent': true,
+          'isOpenToAll': true
+        };
+      } else {
+        $scope.newUser = false;
+        $scope.user = Restangular.copy(user);
+      }
 
       $scope.save = function() {
-        if ($scope.user.schoolId === '') {
-          $scope.user.schoolId = null;
+        // if ($scope.user.schoolId === '') {
+        //   $scope.user.schoolId = null;
+        // }
+        // if ($scope.user.courseId === '') {
+        //   $scope.user.courseId = null;
+        // }
+        $log.log('user', $scope.user);
+        if ($scope.newUser) {
+          UserService.postUser($scope.user).then(function() {
+            $state.go('user.list');
+            $rootScope.$broadcast('userDataChange', $scope.user);
+          });
+        } else {
+          $scope.user.put().then(function() {
+            $state.go('user.list');
+            $rootScope.$broadcast('userDataChange', $scope.user);
+          });
         }
-        if ($scope.user.courseId === '') {
-          $scope.user.courseId = null;
-        }
-        $scope.user.$save(function(user) {
-          $state.go('user.list');
-          $rootScope.$broadcast('userDataChange', $scope.user);
-        });
       };
 
       $scope.tierOptions = {
