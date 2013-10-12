@@ -18,25 +18,21 @@
 //= require states/states.js
 //= require auth/main.js
 
-//= require group/main.js
-//= require user/main.js
 //= require dashboard/main.js
 //= require course/main.js
 //= require portfolio/main.js
-//= require search/main.js
+// require search/main.js
 //= require call/notification.js
 
 //= require_self
 //= require kabam/app.js
-//= require kabam/controllers/index.js
 
 (function(){
   'use strict';
 
   window.moduleDependencies = [
-    'KabamGroup', 'KabamUser',
     'Dashboard', 'Course',
-    'Portfolio', 'Search'
+    'Portfolio'
   ];
 
 })();
