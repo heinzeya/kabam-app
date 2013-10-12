@@ -2,18 +2,10 @@
   "name": "kabam-app",
   "version": "0.0.1",
   "dependencies": {
-    "kabam": "https://github.com/mykabam/kabam.git",
-    "font-awesome": "*",
-    "angular-ui-utils": "*",
-    "ng-grid": "*",
-    "lodash": "*",
-    "angular-ui-select2": "*",
-    "angular-bootstrap": "*",
-    "angular-ui-calendar": "*",
-    "restangular": "*"
+    "kabam": "https://github.com/mykabam/kabam.git"
   },
   "devDependencies": {
-    "angular-mocks": "*",
+    "angular-mocks": "~1.2.0",
     "chai": "*"
   }
 }
