@@ -21,8 +21,7 @@
 //= require dashboard/main.js
 //= require course/main.js
 //= require portfolio/main.js
-// require search/main.js
-//= require call/notification.js
+//= require webrtc/main.js
 
 //= require_self
 //= require kabam/app.js
