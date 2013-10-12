@@ -33,8 +33,7 @@
     "ncp": "*",
     "colors": "*",
     "kabam": "git+https://github.com/mykabam/kabam.git",
-    "kabam-plugin-migrate": "git+https://github.com/mykabam/kabam-plugin-migrate.git",
-    "toml": "*"
+    "kabam-plugin-migrate": "git+https://github.com/mykabam/kabam-plugin-migrate.git"
   },
   "devDependencies": {
     "bower": "~1.2.6",
