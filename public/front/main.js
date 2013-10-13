@@ -1,5 +1,4 @@
 jQuery(document).ready(function($) {
-  console.log('ready');
 
   if ($('.alert-error').length) {
     console.log('dropdown executed', $('.alert-error').length);
@@ -64,7 +63,7 @@ jQuery(document).ready(function($) {
 
   // Preventing from spam mail
   $('#frontpage-contacts-hidden-prevent-field').parent().html('');
-  $('#frontpage-contacts .contact-form').submit(function() {
+  $('#contact-us').submit(function() {
 
     $(this).find('input[type="text"], textarea').each(function() {
       if (!$(this).attr('data-placeholder'))

@@ -174,8 +174,9 @@
                         <p><strong>Call us</strong><br />Company Name<br />Address Line 1<br />Address Line 2</p>
                         <p><strong>Fax</strong><br />555.555.5555</p>
                       </div>
-                      <form class="contact-form" method="post" action="/contacts/send">
-                        <div id="contact-form-message"></div>
+                      <form id="contact-us" class="contact-form" method="post" action="/contact-us">
+                        <input type="hidden" name="_csrf" value="[[csrf]]"/>
+                        <div id="contact-form-message" class="alert alert-info"></div>
                         <p>                        <input type="text" name="name" data-placeholder="Your name" /><br /><input type="text" name="email" data-placeholder="Email address" /><br /><textarea name="message" data-placeholder="Message"></textarea><br /><button type="submit">send your message</button></p>
                         <div style="display: none;"><input type="hidden" id="frontpage-contacts-hidden-prevent-field" name="prevent_code" value="XsXsXs,a.ssd#$$..." /></div>
                       </form>

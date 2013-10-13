@@ -226,7 +226,10 @@ body.front .nav-collapse, body.front .nav-collapse.collapse { height: auto; disp
 .frontpage-memberships .frontpage-membership .membership-content ul li { height: 50px; border-bottom: 1px solid #e9e9e9; font-size: 14px; color: #777777; line-height: 50px; text-indent: 28px; }
 .frontpage-memberships .frontpage-membership .membership-content ul li.last { border-bottom: 0px solid #e9e9e9; }
 
-#contact-form-message { display: none; }
+#contact-form-message {
+  display: none;
+
+}
 
 /* User Login Box */
 .bootstrap-user-loginform-wrapper { padding: 11px 16px; }
