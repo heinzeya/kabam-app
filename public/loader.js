@@ -11,7 +11,7 @@
 //= require angular-bootstrap/ui-bootstrap-tpls.js
 //= require angular-ui-utils/modules/utils.js
 //= require angular-ui-select2/src/select2.js
-//= require ng-grid/ng-grid-2.0.7.debug.js
+//= require angular-grid/ng-grid-2.0.7.debug.js
 //= require fullcalendar/fullcalendar.js
 //= require angular-ui-calendar/src/calendar.js
 //= require restangular/dist/restangular.js
