@@ -70,7 +70,7 @@
           localVideoContainer.insertBefore(video, null);
         } else {
           // Just add 1 remote video for 1 user
-          if (remoteVideoContainer.childElementCount > 0 && document.getElementById(e.userid)) return;              
+          if (remoteVideoContainer.childElementCount > 0 && document.getElementById(e.userid)) return;
           // Add new remote video
           remoteVideoContainer.insertBefore(video, null);
         }

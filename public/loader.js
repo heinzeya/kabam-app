@@ -31,7 +31,7 @@
 
   window.moduleDependencies = [
     'Dashboard', 'Course',
-    'Portfolio'
+    'Portfolio', 'webRtc'
   ];
 
 })();
