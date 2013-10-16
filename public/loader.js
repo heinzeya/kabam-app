@@ -1,5 +1,6 @@
 //= require jquery/jquery.js
 //= require jquery-ui/ui/jquery-ui.js
+//= require pines-notify/jquery.pnotify.js
 //= require lodash/dist/lodash.js
 //= require vendor/bootstrap.js
 //= require select2/select2.js
