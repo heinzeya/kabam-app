@@ -1,7 +1,7 @@
 /**
  * Setup dummy users. This setup only works if the kabam_dev is not created yet,
  * so we need to drop the kabam_dev database first, before we run kabam-migrate.
- * 
+ *
  * TODO it might be great if we can let this setup also drop the kabam_dev
  *      database instead of do it manually.
  */
@@ -22,6 +22,7 @@ exports.up = function(next) {
       }, function(err, admin) {
         if (err) {
           callback(err);
+          return;
         }
         admin.setPassword('kabamadmin', callback);
       });
@@ -36,6 +37,7 @@ exports.up = function(next) {
       }, function(err, user) {
         if (err) {
           callback(err);
+          return;
         }
         user.setPassword('user1', callback);
       });
@@ -50,6 +52,7 @@ exports.up = function(next) {
       }, function(err, user) {
         if (err) {
           callback(err);
+          return;
         }
         user.setPassword('user2', callback);
       });
@@ -64,6 +67,7 @@ exports.up = function(next) {
       }, function(err, user) {
         if (err) {
           callback(err);
+          return;
         }
         user.setPassword('caller1', callback);
       });
@@ -78,6 +82,7 @@ exports.up = function(next) {
       }, function(err, user) {
         if (err) {
           callback(err);
+          return;
         }
         user.setPassword('caller2', callback);
       });
@@ -92,6 +97,7 @@ exports.up = function(next) {
       }, function(err, group) {
         if (err) {
           callback(err);
+          return;
         }
         callback(null, group);
       });
@@ -99,8 +105,9 @@ exports.up = function(next) {
   ], function(err, results) {
     if (err) {
       console.error(err);
+      process.exit(1);
     }
-    console.log('Users kabamadmin, user1 and user2 added');
+    console.log('Users kabamadmin, caller1, caller2, user1 and user2 added');
     console.log('World group added');
     next();
   });
@@ -125,6 +132,16 @@ exports.down = function(next) {
       }, undefined, callback);
     },
     function(callback) {
+      kabamMigrate.model.User.findOneAndRemove({
+        username: 'caller1'
+      }, undefined, callback);
+    },
+    function(callback) {
+      kabamMigrate.model.User.findOneAndRemove({
+        username: 'caller2'
+      }, undefined, callback);
+    },
+    function(callback) {
       kabamMigrate.model.Group.findOneAndRemove({
         name: 'Main Site'
       }, undefined, callback);
@@ -132,6 +149,7 @@ exports.down = function(next) {
   ], function(err, results) {
     if (err) {
       console.error(err);
+      process.exit(1);
     }
     console.log('initial user and group removed');
     next();
