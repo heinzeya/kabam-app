@@ -33,7 +33,8 @@
     "ncp": "*",
     "colors": "*",
     "kabam": "git+https://github.com/mykabam/kabam.git",
-    "kabam-plugin-migrate": "git+https://github.com/mykabam/kabam-plugin-migrate.git"
+    "kabam-plugin-migrate": "git+https://github.com/mykabam/kabam-plugin-migrate.git",
+    "kabam-plugin-webrtc": "~0.3.0"
   },
   "devDependencies": {
     "bower": "~1.2.6",
