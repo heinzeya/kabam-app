@@ -2,6 +2,7 @@
   var localVideoContainer = document.getElementById('local-video-container');
 
   var callSpace = io.connect('ws://localhost:3000/webrtc/call');
+  var globalSpace = io.connect('ws://localhost:3000');
   var userId;
   var roomsList = document.getElementById('rooms-list');
 
@@ -23,13 +24,13 @@
       peer.startBroadcasting();
     }
 
-    socket.on('chat:newMessage', function(data) {
+    globalSpace.on('chat:newMessage', function(data) {
       $scope.room.messages.push(data);
       $scope.$apply();
     });
 
     // partner disconnect
-    socket.on('chat:disconnect', function(data) {
+    globalSpace.on('chat:disconnect', function(data) {
       if (roomId == data.roomid) {
         $('#' + data.userid).remove();
         $scope.room.messages.push(data);
