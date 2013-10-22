@@ -1,7 +1,7 @@
   var remoteVideoContainer = document.getElementById('remote-video-container');
   var localVideoContainer = document.getElementById('local-video-container');
 
-  var socket = io.connect('');
+  var callSpace = io.connect('ws://localhost:3000/webrtc/call');
   var userId;
   var roomsList = document.getElementById('rooms-list');
 
@@ -24,14 +24,12 @@
     }
 
     socket.on('chat:newMessage', function(data) {
-      //console.log(data);
       $scope.room.messages.push(data);
       $scope.$apply();
     });
 
     // partner disconnect
     socket.on('chat:disconnect', function(data) {
-      //console.log(data);
       if (roomId == data.roomid) {
         $('#' + data.userid).remove();
         $scope.room.messages.push(data);
@@ -42,29 +40,26 @@
   }
 
   // CHAT - CALLING
-  socket.on('connect', function() {
-    //console.log('connect');
-    socket.emit('chat:joinRoom', roomId);
+  callSpace.on('connect', function() {
 
-    socket.on('chat:id', function(id) {
-      userId = id;
+    // The roomId is defined in room server-side views
+    // check out the details on views/webrtc/call/room.html
+    callSpace.emit('chat:joinRoom', roomId);
+
+    callSpace.on('chat:id', function(data) {
+      userId = data.userId;
 
       var peer = new PeerConnection({
-        socketEvent: 'chat:video',
-        roomid: roomId,
-        socket: socket,
-        userid: id
+        socketEvent: 'calling',
+        roomid: data.roomId,
+        socket: callSpace,
+        userid: data.userId
       });
 
-      // Video 1-1
-
       peer.onStreamAdded = function(e) {
-        //if (e.type == 'local') document.querySelector('#start-broadcasting').disabled = false;
         var video = e.mediaElement;
         video.setAttribute('width', '100%');
         video.setAttribute('controls', false);
-
-        console.log(video);
 
         if (e.type == 'local') {
           localVideoContainer.insertBefore(video, null);
@@ -76,24 +71,10 @@
         }
 
         video.play();
-        //rotateVideo(video);
-        //scaleVideos();
       };
 
       peer.onUserFound = function(userid) {
-        if (document.getElementById(userid)) return;
-        var tr = document.createElement('tr');
-        tr.id = userid;
-
-        var td1 = document.createElement('td');
-
-
-        //td1.innerHTML = userid;
-
-        tr.appendChild(td1);
         peer.sendParticipationRequest(userid);
-
-        //roomsList.appendChild(tr);
       };
 
       // Auto broadcasting

@@ -25,7 +25,7 @@ function UserCtrl($scope, $http) {
   $scope.call = function(username) {
     $http.get('/call/call/' + username)
       .success(function(data) {
-        window.open("/call/room/" + data, '_self');
+        window.open("/call/room/" + data.roomId, '_self');
       });
   }
 
@@ -74,8 +74,6 @@ function UserCtrl($scope, $http) {
     var formData = new FormData();
     formData.append('audio', audioBlob);
     formData.append('video', videoBlob);
-    //formData.append('_csrf', _csrf);
-
 
     $http({
       method: 'POST',
