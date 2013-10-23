@@ -1,10 +1,7 @@
   var remoteVideoContainer = document.getElementById('remote-video-container');
   var localVideoContainer = document.getElementById('local-video-container');
 
-  var callSpace = io.connect('ws://localhost:3000/webrtc/call');
   var globalSpace = io.connect('ws://localhost:3000');
-  var userId;
-  var roomsList = document.getElementById('rooms-list');
 
   function RoomController($scope, $http) {
 
@@ -18,10 +15,6 @@
         content: $scope.room.newMessage
       });
       $scope.room.newMessage = '';
-    }
-
-    $scope.startBroadcasting = function() {
-      peer.startBroadcasting();
     }
 
     globalSpace.on('chat:newMessage', function(data) {
@@ -41,20 +34,21 @@
   }
 
   // CHAT - CALLING
-  callSpace.on('connect', function() {
+  globalSpace.on('connect', function() {
 
     // The roomId is defined in room server-side views
     // check out the details on views/webrtc/call/room.html
-    callSpace.emit('chat:joinRoom', roomId);
+    globalSpace.emit('chat:joinRoom', {
+      roomId: roomId
+    });
 
-    callSpace.on('chat:id', function(data) {
-      userId = data.userId;
+    globalSpace.on('chat:id', function(data) {
 
       var peer = new PeerConnection({
         socketEvent: 'calling',
         roomid: data.roomId,
-        socket: callSpace,
-        userid: data.userId
+        socket: globalSpace,
+        userid: data.username
       });
 
       peer.onStreamAdded = function(e) {
