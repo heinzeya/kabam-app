@@ -6,13 +6,12 @@
 (function() {
 
   /**
-   * @param {Object} configValue The property is {socketURL, socketEvent, userid, roomid}
+   * @param {Object} configValue The property is {socketURL, socketEvent, userid}
    */
   window.PeerConnection = function(configValue) {
 
     this.userid = configValue.userid || getToken();
     this.peers = {};
-    this.roomid = configValue.roomid;
 
     if (!configValue.socketURL) socketURL = '';
     else socketUrl = configValue.socketURL;

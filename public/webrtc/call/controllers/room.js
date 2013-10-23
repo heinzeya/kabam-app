@@ -46,7 +46,6 @@
 
       var peer = new PeerConnection({
         socketEvent: 'calling',
-        roomid: data.roomId,
         socket: globalSpace,
         userid: data.username
       });
