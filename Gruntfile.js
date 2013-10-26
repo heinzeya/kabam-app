@@ -61,6 +61,9 @@ module.exports = function(grunt) {
     bgShell: {
       server: {
         cmd: 'node index.js',
+        execOpts: {
+          cwd: __dirname
+        },
         bg: true
       }
     },
