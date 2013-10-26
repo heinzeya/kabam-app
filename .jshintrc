@@ -30,6 +30,8 @@
     "afterEach",
     "exports",
     "jQuery",
+    "$",
+    "_",
     "angular"
   ]
 }

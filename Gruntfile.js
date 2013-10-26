@@ -39,13 +39,49 @@ module.exports = function(grunt) {
         files: '<%= jshint.gruntfile.src %>',
         tasks: ['jshint:gruntfile']
       }
-    }
-  });
+    },
 
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
+    nodemon: {
+      dev: {
+        options: {
+          watchedExtensions: [ 'js', 'toml' ],
+          watchedFolders: [ 'index.js', 'config', 'models', 'routes', 'views' ]
+        }
+      }
+    },
+
+    karma: {
+      e2e: {
+        configFile: 'test/karma-e2e.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS']
+      }
+    },
+
+    bgShell: {
+      server: {
+        cmd: 'node index.js',
+        bg: true
+      }
+    },
+
+    wait: {
+      waitServer: {
+        options: {
+          delay: 6000
+        }
+      }
+    }
+
+  });
 
   // Default task.
   grunt.registerTask('default', ['jshint']);
+
+  grunt.registerTask('server', ['nodemon:dev']);
+
+  grunt.registerTask('test:e2e', ['bgShell:server', 'wait:waitServer', 'karma:e2e']);
+
+  grunt.registerTask('test', ['test:e2e']);
 
 };
