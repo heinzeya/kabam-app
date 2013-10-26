@@ -1,5 +1,5 @@
 var whoAmI = require(process.cwd() + '/package.json'),
-  kabam = undefined;
+  kabam;
 
 if (whoAmI.name === 'kabam') {
   //this is demo application
