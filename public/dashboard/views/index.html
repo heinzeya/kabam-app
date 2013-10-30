@@ -2,16 +2,37 @@
 
 <div class="row-fluid">
   <div class="span9">
-    <div ui-calendar="uiConfig.calendar" ng-model="eventSources"></div>
+    <div ui-calendar="uiConfig.calendar" config="uiConfig.calendar" ng-model="eventSources" calendar="calendar"></div>
   </div>
   <div class="span3">
     <h4>Add an Event</h4>
     <div>
-      <button class="btn btn-block">Discussion</button>
-      <button class="btn btn-block">Test</button>
-      <button class="btn btn-block">Quiz</button>
-      <button class="btn btn-block">Assignment</button>
-      <button class="btn btn-block">Reading</button>
+      <button class="btn btn-block" ng-click="addEvent('discussion')">Discussion</button>
+      <button class="btn btn-block" ng-click="addEvent('test')">Test</button>
+      <button class="btn btn-block" ng-click="addEvent('quiz')">Quiz</button>
+      <button class="btn btn-block" ng-click="addEvent('assignment')">Assignment</button>
+      <button class="btn btn-block" ng-click="addEvent('reading')">Reading</button>
+      <button class="btn" ng-click="open()">Open me!</button>
     </div>
   </div>
+</div>
+
+<div ng-controller="EventModalCtrl">
+  <script type="text/ng-template" id="eventModal.html">
+    <div class="modal-header">
+      <h3>I'm a modal!</h3>
+    </div>
+    <div class="modal-body">
+      <ul>
+        <li ng-repeat="item in items">
+          <a ng-click="selected.item = item">{{ item }}</a>
+        </li>
+      </ul>
+      Selected: <b>{{ selected.item }}</b>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" ng-click="ok()">OK</button>
+      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    </div>
+  </script>
 </div>
