@@ -17,7 +17,6 @@
 //= require fullcalendar/fullcalendar.js
 //= require angular-ui-calendar/src/calendar.js
 //= require restangular/dist/restangular.js
-//= require angular-route/angular-route.js
 //= require states/states.js
 //= require auth/main.js
 
