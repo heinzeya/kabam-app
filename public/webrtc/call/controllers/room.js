@@ -1,81 +1,133 @@
-  var remoteVideoContainer = document.getElementById('remote-video-container');
-  var localVideoContainer = document.getElementById('local-video-container');
+function RoomController($rootScope, $scope, $http, socket, $window, Room) {
+  $scope.room = {
+    caller: $window.USER.username,
+    callee: 'Callee',
+    messages: [],
+    newMessage: '',
+    id: Room.getActiveRoom(),
+    ready: false,
+    statesShared: false
+  };
 
-  var globalSpace = io.connect('ws://localhost:3000');
+  /*
+   * Start peer connection after both the callee and caller sharing the states
+   */
+  $scope.startPeerConnection = function() {
 
-  function RoomController($scope, $http) {
+    var peer = new PeerConnection({
+      socketEvent: 'calling',
+      userid: $scope.room.callee,
+      roomId: $scope.room.id
+    });
 
-    $scope.room = {
-      messages: [],
-      newMessage: ''
+    peer.onStreamAdded = function(e) {
+
+      var video = e.mediaElement;
+      video.setAttribute('width', '100%');
+      video.setAttribute('controls', true);
+
+      if (e.type == 'local') {
+        $('#local-video-container').replaceWith(video);
+      } else {
+        $('#remote-video-container').replaceWith(video);
+      }
+
+      video.play();
     };
 
-    $scope.sendMessage = function() {
-      socket.emit('chat:newMessage', {
-        content: $scope.room.newMessage
-      });
-      $scope.room.newMessage = '';
-    }
+    peer.onUserFound = function(userid) {
+      peer.sendParticipationRequest(userid);
+    };
 
-    globalSpace.on('chat:newMessage', function(data) {
-      $scope.room.messages.push(data);
-      $scope.$apply();
-    });
-
-    // partner disconnect
-    globalSpace.on('chat:disconnect', function(data) {
-      if (roomId == data.roomid) {
-        $('#' + data.userid).remove();
-        $scope.room.messages.push(data);
-        $scope.$apply();
-      }
-    });
+    // Auto broadcasting
+    (function startBroadcast() {
+      if (peer.startBroadcasting) peer.startBroadcasting();
+      else setTimeout(startBroadcast, 1000);
+    })();
 
   }
 
-  // CHAT - CALLING
-  globalSpace.on('connect', function() {
+  /*
+   * Initiate the controller with ready state
+   */
 
-    // The roomId is defined in room server-side views
-    // check out the details on views/webrtc/call/room.html
-    globalSpace.emit('chat:joinRoom', {
-      roomId: roomId
+  $scope.init = function() {
+
+    socket.emit('ready', {
+      ready: true
     });
+  }
 
-    globalSpace.on('chat:id', function(data) {
+  $scope.sendMessage = function() {
+    socket.emit('send_new_chat_message', {
+      content: $scope.room.newMessage
+    });
+    $scope.room.newMessage = '';
+  }
 
-      var peer = new PeerConnection({
-        socketEvent: 'calling',
-        socket: globalSpace,
-        userid: data.username
+  $scope.data = {
+    callee: '',
+    // TODO replace me with the real user contacts
+    onlineContacts: [
+      'caller1',
+      'caller2'
+    ]
+  };
+
+  $scope.call = function(username) {
+
+    Room.setActiveRoom(+(new Date()).getTime() + '' +
+      (Math.round(Math.random() * 9999999999) + 9999999999));
+
+    $scope.room.id = Room.getActiveRoom();
+
+    $http.get('/call/' + username + '/room/' + $scope.room.id)
+      .success(function(data, status, headers, config) {
+        window.open('/home#/call/room/' + $scope.room.id, '_self');
+      })
+      .error(function(data, status, headers, config) {
+        console.log('data, status', data, status);
       });
+  }
 
-      peer.onStreamAdded = function(e) {
-        var video = e.mediaElement;
-        video.setAttribute('width', '100%');
-        video.setAttribute('controls', false);
+  $scope.$watch('room.callee', function() {
 
-        if (e.type == 'local') {
-          localVideoContainer.insertBefore(video, null);
-        } else {
-          // Just add 1 remote video for 1 user
-          if (remoteVideoContainer.childElementCount > 0 && document.getElementById(e.userid)) return;
-          // Add new remote video
-          remoteVideoContainer.insertBefore(video, null);
-        }
+    if ($scope.room.callee !== 'Callee' && $scope.room.id !== null) {
+      $scope.room.statesShared = true;
 
-        video.play();
-      };
+      socket.emit('share_states', {
+        caller: $window.USER.username,
+        roomId: $scope.room.id
+      });
+    }
+  });
 
-      peer.onUserFound = function(userid) {
-        peer.sendParticipationRequest(userid);
-      };
+  socket.on('ready', function(data) {
 
-      // Auto broadcasting
-      (function startBroadcast() {
-        if (peer.startBroadcasting) peer.startBroadcasting();
-        else setTimeout(startBroadcast, 1000);
-      })();
-    });
+    $scope.room.ready = data.ready;
+
+    if ($scope.room.id !== null) {
+      socket.emit('share_states', {
+        caller: $window.USER.username,
+        roomId: $scope.room.id
+      });
+    }
+
+    $scope.$apply();
+  });
+
+  socket.on('send_new_chat_message', function(data) {
+    $scope.room.messages.push(data);
+    $scope.$apply();
+  });
+
+  socket.on('share_states_to_clients', function(data) {
+
+    $scope.room.id = data.roomId;
+    // set the local callee to caller username
+    if ($window.USER.username != data.caller) $scope.room.callee = data.caller;
+
+    $scope.$apply();
 
   });
+};

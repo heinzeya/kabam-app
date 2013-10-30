@@ -6,15 +6,16 @@
 (function() {
 
   /**
-   * @param {Object} configValue The property is {socketURL, socketEvent, userid}
+   * @param {Object} configValue The property is {socketURL, socketEvent, userid, roomId}
    */
   window.PeerConnection = function(configValue) {
 
     this.userid = configValue.userid || getToken();
     this.peers = {};
+    this.roomId = configValue.roomId;
 
     if (!configValue.socketURL) socketURL = '';
-    else socketUrl = configValue.socketURL;
+    else socketURL = configValue.socketURL;
 
     if (!configValue.socketEvent) socketEvent = 'message';
     else socketEvent = configValue.socketEvent;
@@ -33,7 +34,8 @@
         console.log('Start Broadcasting');
         socket.send({
           userid: root.userid,
-          broadcasting: true
+          broadcasting: true,
+          roomId: root.roomId
         });
         !self.participantFound && !self.stopBroadcasting &&
           setTimeout(transmit, 3000);

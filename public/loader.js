@@ -13,9 +13,11 @@
 //= require angular-ui-utils/modules/utils.js
 //= require angular-ui-select2/src/select2.js
 //= require angular-grid/ng-grid-2.0.7.debug.js
+//= require angular-socket-io/socket.js
 //= require fullcalendar/fullcalendar.js
 //= require angular-ui-calendar/src/calendar.js
 //= require restangular/dist/restangular.js
+//= require angular-route/angular-route.js
 //= require states/states.js
 //= require auth/main.js
 

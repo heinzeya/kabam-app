@@ -13,21 +13,6 @@ var recordAudio, recordVideo;
 function UserCtrl($scope, $http) {
 
   $scope.showRecording = false;
-  $scope.data = {
-    selected: '',
-    // TODO replace me with the real user contacts
-    onlineContacts: [
-      'caller1',
-      'caller2'
-    ]
-  };
-
-  $scope.call = function(username) {
-    $http.get('/call/call/' + username)
-      .success(function(data) {
-        window.open("/call/room/" + data.roomId, '_self');
-      });
-  }
 
   $scope.leaveMessage = function(username) {
     $scope.showRecording = true;
