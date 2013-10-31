@@ -1,76 +1,84 @@
-var _csrf = '[[ csrf ]]';
-var homeOwner = '[[username]]';
-var localStream;
+(function() {
 
-var videoPreview = document.getElementById('preview');
-var video_constraints = {
-  mandatory: {},
-  optional: []
-};
+  'use strict';
 
-var recordAudio, recordVideo;
+  var _csrf = '[[ csrf ]]';
+  var homeOwner = '[[username]]';
+  var localStream;
 
-function UserCtrl($scope, $http) {
+  var videoPreview = document.getElementById('preview');
+  var video_constraints = {
+    mandatory: {},
+    optional: []
+  };
 
-  $scope.showRecording = false;
+  var recordAudio, recordVideo;
 
-  $scope.leaveMessage = function(username) {
-    $scope.showRecording = true;
-  }
+  angular.module('kabam.webrtc').controller('UserCtrl', ['$scope', '$http',
+    function($scope, $http) {
 
-  // Do recording
-  $scope.record = function() {
-    // Get media and record
-    navigator.getUserMedia({
-        audio: true,
-        video: video_constraints
-      },
-      function(stream) {
-        localStream = stream;
-        videoPreview.src = window.URL.createObjectURL(stream);
-        videoPreview.play();
+      $scope.showRecording = false;
 
-        recordAudio = RecordRTC(stream, {});
-        recordVideo = RecordRTC(stream, {
-          type: 'video'
-        });
-
-        recordAudio.startRecording();
-        recordVideo.startRecording();
-      },
-      function(error) {}
-    );
-  }
-
-  // Stop recording
-  $scope.stopRecord = function() {
-    recordAudio.stopRecording();
-    recordVideo.stopRecording();
-
-    $scope.saveRecord(recordAudio.getBlob(), recordVideo.getBlob());
-
-    videoPreview.src = "";
-
-    localStream.stop();
-  }
-
-  // Save record to server
-  $scope.saveRecord = function(audioBlob, videoBlob) {
-    var formData = new FormData();
-    formData.append('audio', audioBlob);
-    formData.append('video', videoBlob);
-
-    $http({
-      method: 'POST',
-      url: '/api/recordings/' + homeOwner,
-      data: formData,
-      transformRequest: angular.identity,
-      headers: {
-        'Content-Type': undefined
+      $scope.leaveMessage = function(username) {
+        $scope.showRecording = true;
       }
-    })
-      .success(function(data) {
-        console.log(data);
-      });
-  }
-}
+
+      // Do recording
+      $scope.record = function() {
+        // Get media and record
+        navigator.getUserMedia({
+            audio: true,
+            video: video_constraints
+          },
+          function(stream) {
+            localStream = stream;
+            videoPreview.src = window.URL.createObjectURL(stream);
+            videoPreview.play();
+
+            recordAudio = RecordRTC(stream, {});
+            recordVideo = RecordRTC(stream, {
+              type: 'video'
+            });
+
+            recordAudio.startRecording();
+            recordVideo.startRecording();
+          },
+          function(error) {}
+        );
+      }
+
+      // Stop recording
+      $scope.stopRecord = function() {
+        recordAudio.stopRecording();
+        recordVideo.stopRecording();
+
+        $scope.saveRecord(recordAudio.getBlob(), recordVideo.getBlob());
+
+        videoPreview.src = "";
+
+        localStream.stop();
+      }
+
+      // Save record to server
+      $scope.saveRecord = function(audioBlob, videoBlob) {
+        var formData = new FormData();
+        formData.append('audio', audioBlob);
+        formData.append('video', videoBlob);
+
+        $http({
+          method: 'POST',
+          url: '/api/recordings/' + homeOwner,
+          data: formData,
+          transformRequest: angular.identity,
+          headers: {
+            'Content-Type': undefined
+          }
+        })
+          .success(function(data) {
+            console.log(data);
+          });
+      }
+
+    }
+  ]);
+})();

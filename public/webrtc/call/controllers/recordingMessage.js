@@ -1,55 +1,68 @@
-angular.module('kabam', ['ui.bootstrap']);
+(function() {
+  'use strict';
 
-function RecordingMessageCtrl($scope, $http, $modal) {
-    $scope.voiceMessages = [];
+  angular.module('kabam.webrtc')
+    .controller('RecordingMessageCtrl', ['$scope', '$http', '$modal',
+      function($scope, $http, $modal) {
 
-    $http.get('/api/recordingMessages', {responseType: 'json'})
-      .success(function(data){
-        $scope.voiceMessages = data;
+        $scope.voiceMessages = [];
 
-      });
+        $http.get('/api/recordingMessages', {
+          responseType: 'json'
+        })
+          .success(function(data) {
+            $scope.voiceMessages = data;
 
-    $scope.playMail = function(message) {          
-      var playVoiceMailInstance = $modal.open({
-        templateUrl: 'playMailContent.html',
-        controller: ModalOpenVoiceMailCtrl,
-        resolve: {
-          message: function() { return message;}
-        }
-      });
+          });
 
-      playVoiceMailInstance.opened.then(function(){
-        // // Sync audio and video
-        // console.log('-----------');
-        // console.log($('#audio-content').attr('src'));
+        $scope.playMail = function(message) {
+          var playVoiceMailInstance = $modal.open({
+            templateUrl: 'playMailContent.html',
+            controller: ModalOpenVoiceMailCtrl,
+            resolve: {
+              message: function() {
+                return message;
+              }
+            }
+          });
 
-        // var audioContent = Popcorn('#audio-content');
-        // var videoContent = Popcorn('#video-content');
+          playVoiceMailInstance.opened.then(function() {
+            // // Sync audio and video
+            // console.log('-----------');
+            // console.log($('#audio-content').attr('src'));
 
-        // audioContent.on('play', function(){
-        //   videoContent.play();
-        // });
+            // var audioContent = Popcorn('#audio-content');
+            // var videoContent = Popcorn('#video-content');
 
-        // audioContent.on('pause', function(){
-        //   videoContent.pause();
-        // });
+            // audioContent.on('play', function(){
+            //   videoContent.play();
+            // });
 
-        // videoContent.on('play', function(){
-        //   audioContent.play();
-        // });
+            // audioContent.on('pause', function(){
+            //   videoContent.pause();
+            // });
 
-        // videoContent.on('pause', function(){
-        //   audioContent.pause();
-        // });
-      });
-    };
-  }
+            // videoContent.on('play', function(){
+            //   audioContent.play();
+            // });
 
-function ModalOpenVoiceMailCtrl($scope, $modalInstance, message) {
-  
-  $scope.message = message;
-  
-  $scope.viewVoiceMailDone = function() {
-    $modalInstance.close();
-  };
-}
+            // videoContent.on('pause', function(){
+            //   audioContent.pause();
+            // });
+          });
+        };
+
+      }
+    ])
+    .controller('ModalOpenVoiceMailCtrl', ['$scope', '$modalInstance', 'message',
+      function($scope, $modalInstance, message) {
+
+
+        $scope.message = message;
+
+        $scope.viewVoiceMailDone = function() {
+          $modalInstance.close();
+        };
+      }
+    ]);
+})();

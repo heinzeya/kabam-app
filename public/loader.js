@@ -33,7 +33,7 @@
 
   window.moduleDependencies = [
     'Dashboard', 'Course',
-    'Portfolio', 'webRtc'
+    'Portfolio', 'kabam.webrtc'
   ];
 
 })();
